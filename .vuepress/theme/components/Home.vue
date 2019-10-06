@@ -5,10 +5,10 @@
         :src="$withBase(data.heroImage)"
         :alt="data.heroAlt || 'hero'">
 
-      <h1 v-if="data.heroText !== null" id="main-title">{{ data.heroText || $title || 'Hello' }}</h1>
+      <h1 v-if="data.heroText !== null" id="main-title">{{ data.heroText || $title }}</h1>
 
       <p class="description">
-        {{ data.tagline || $description || 'Welcome to your VuePress site' }}
+        {{ data.tagline || $description }}
       </p>
 
       <p class="action"
@@ -18,27 +18,22 @@
       </p>
     </header>
 
-    <h1 style="margin: 3rem 0">Overview</h1>
+    <h1 style="margin: 3rem 0">{{data.heroTitle}}</h1>
 
-    <h2 style="margin: 2.5rem auto 0; border: 0 ">Laravel</h2>
-    <div class="features" style="margin-top: 0"
-      v-if="data.projects && data.projects.length">
-      <div class="feature"
-        v-for="(project, index) in data.projects"
-        :key="index">
-        <h2><a :href="project.link">{{ project.title }}</a></h2>
-        <p>{{ project.details }}</p>
-      </div>
-    </div>
-
-      <h2 style="margin: 2.5rem auto 0; border: 0 ">Altro</h2>
-      <div class="features" style="margin-top: 0"
-           v-if="data.projects && data.projects.length">
-          <div class="feature"
-               v-for="(project, index) in data.projects"
+      <div v-if="data.projectTypes && data.projectTypes.length">
+          <div class="projectsType"
+               v-for="(projectType, index) in data.projectTypes"
                :key="index">
-              <h2><a :href="project.link">{{ project.title }}</a></h2>
-              <p>{{ project.details }}</p>
+              <h2>{{ projectType.title }}</h2>
+              <div class="projects"
+                   v-if="data.projects && data.projects.length">
+                  <div class="project"
+                       v-for="(project, index) in data.projects"
+                       :key="index" v-if="projectType.title === project.type">
+                      <h2><a :href="project.link">{{ project.title }}</a></h2>
+                      <p>{{ project.details }}</p>
+                  </div>
+              </div>
           </div>
       </div>
 
@@ -82,8 +77,8 @@ export default {
   .hero
     text-align center
     img
-      max-width: 100%
-      max-height 280px
+      max-width 100%
+      max-height 35px
       display block
       margin 3rem auto 1.5rem
     h1
@@ -107,7 +102,15 @@ export default {
       border-bottom 1px solid darken($accentColor, 10%)
       &:hover
         background-color lighten($accentColor, 10%)
-  .features
+  .projectsType
+    > h2
+      margin 2.5rem auto 0; border: 0
+    .projects
+      margin-top 0
+    .project
+      > h2
+       text-decoration underline
+  .features, .projects
     border-top 1px solid $borderColor
     padding 1.2rem 0
     margin-top 2.5rem
@@ -116,7 +119,7 @@ export default {
     align-items flex-start
     align-content stretch
     justify-content space-between
-  .feature
+  .feature, .project
     flex-grow 1
     flex-basis 30%
     max-width 30%
@@ -136,9 +139,9 @@ export default {
 
 @media (max-width: $MQMobile)
   .home
-    .features
+    .features, .projects
       flex-direction column
-    .feature
+    .feature, .project
       max-width 100%
       padding 0 2.5rem
 
@@ -159,7 +162,7 @@ export default {
       .action-button
         font-size 1rem
         padding 0.6rem 1.2rem
-    .feature
+    .feature, .project
       h2
         font-size 1.25rem
 </style>
