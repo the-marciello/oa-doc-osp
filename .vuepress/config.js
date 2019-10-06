@@ -3,15 +3,27 @@ module.exports = {
     description: '',
     themeConfig: {
         nav: [
-            { text: 'Guide', link: '/guide/' },
-            { text: 'Github', link: 'https://github.com/offline-agency/laravel-mongo-auto-sync' },
+            { text: 'OA', link: 'https://offlineagency.it' },
+            { text: 'Github', link: 'https://github.com/offline-agency' },
         ],
-        sidebar: {
-            '/guide/': [
-                '',
-                'More Informations'
-            ]
+        sidebar: [
+                {
+                    title: 'Laravel',
+                    children: [
+                        '/laravel/laravel-mongo-auto-sync',
+                        '/laravel/laravel-fatture-in-cloud'
+                    ]
+                },
+                {
+                    title: 'Other',
+                    children: [
+                        '/other/repo-name'
+                    ]
+                },
+                'about-us'
+
+            ],
+
         }
 
-    }
-};
+    };
