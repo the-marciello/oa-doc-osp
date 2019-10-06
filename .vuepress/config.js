@@ -1,6 +1,6 @@
 module.exports = {
-    title: 'LaraMong',
-    description: 'Meta Description',
+    title: 'OA Docs',
+    description: '',
     themeConfig: {
         nav: [
             { text: 'Guide', link: '/guide/' },
@@ -14,4 +14,4 @@ module.exports = {
         }
 
     }
-}
+};
