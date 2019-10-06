@@ -1,11 +1,9 @@
 <template>
   <main class="home" aria-labelledby="main-title">
     <header class="hero">
-      <img
-        v-if="data.heroImage"
+      <img v-if="data.heroImage"
         :src="$withBase(data.heroImage)"
-        :alt="data.heroAlt || 'hero'"
-      >
+        :alt="data.heroAlt || 'hero'">
 
       <h1 v-if="data.heroText !== null" id="main-title">{{ data.heroText || $title || 'Hello' }}</h1>
 
@@ -13,45 +11,48 @@
         {{ data.tagline || $description || 'Welcome to your VuePress site' }}
       </p>
 
-      <p
-        class="action"
-        v-if="data.actionText && data.actionLink"
-      >
-        <NavLink
-          class="action-button"
-          :item="actionLink"
-        />
+      <p class="action"
+        v-if="data.actionText && data.actionLink">
+        <NavLink class="action-button"
+          :item="actionLink"/>
       </p>
     </header>
 
-    <div
-      class="features"
-      v-if="data.features && data.features.length"
-    >
-      <div
-        class="feature"
-        v-for="(feature, index) in data.features"
-        :key="index"
-      >
-        <h2>{{ feature.title }}</h2>
-        <p>{{ feature.details }}</p>
+    <h1 style="margin: 3rem 0">Overview</h1>
+
+    <h2 style="margin: 2.5rem auto 0; border: 0 ">Laravel</h2>
+    <div class="features" style="margin-top: 0"
+      v-if="data.projects && data.projects.length">
+      <div class="feature"
+        v-for="(project, index) in data.projects"
+        :key="index">
+        <h2><a :href="project.link">{{ project.title }}</a></h2>
+        <p>{{ project.details }}</p>
       </div>
     </div>
+
+      <h2 style="margin: 2.5rem auto 0; border: 0 ">Altro</h2>
+      <div class="features" style="margin-top: 0"
+           v-if="data.projects && data.projects.length">
+          <div class="feature"
+               v-for="(project, index) in data.projects"
+               :key="index">
+              <h2><a :href="project.link">{{ project.title }}</a></h2>
+              <p>{{ project.details }}</p>
+          </div>
+      </div>
 
     <Content class="theme-default-content custom"/>
 
     <div
       class="footer"
-      v-if="data.footer"
-    >
+      v-if="data.footer">
       {{ data.footer }}
     </div>
   </main>
 </template>
 
 <script>
-
-import Home from '@child/components/Home.vue'
 import NavLink from '@theme/components/NavLink.vue'
 
 export default {
