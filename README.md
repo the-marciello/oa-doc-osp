@@ -1,16 +1,30 @@
 ---
 home: true
-heroImage: https://raw.githubusercontent.com/asepmaulanaismail/laravel-mongodb-docker/master/cover.png
-heroText: Laravel Mongo CRUD
-tagline: A guide to CRUD operation with mongo and Laravel
-actionText: Get Started →
-actionLink: /guide/
-features:
-- title: Speed up development
-  details: Minimal setup with markdown-centered project structure helps you focus on writing.
-- title: Compatible with Laravel 6
-  details: Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.
-- title: Performant
-  details: VuePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.
-footer: Laramong | Copyright © 2019
+heroImage: https://offlineagency.it/build/oa-assets/img/oa-eb.png
+heroText: Offline Agency Docs
+tagline: Documentation for our comprehensive packages
+actionText: 
+actionLink: 
+heroTitle: Overview
+projectTypes: 
+- title: Laravel
+- title: Other
+projects:
+- title: laravel-mongo-auto-sync
+  link: /laravel/laravel-mongo-auto-sync
+  details: A package that allow to sync changes between collections on MongoDB project.
+  type: Laravel
+- title: laravel-fatture-in-cloud
+  link: /laravel/laravel-fatture-in-cloud
+  type: Laravel
+  details: An integration plugin with Fatture in Cloud Api written in Laravel PHP.
+- title: Repo Name
+  link: /other/repo-name
+  type: Other
+  details: Desc Repo.
+- title: 
+  link: 
+  details: 
+  type: Laravel 
+footer: © 2019 Offline Agency
 ---
