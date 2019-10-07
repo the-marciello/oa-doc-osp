@@ -4,4 +4,5 @@
 #
 # Recommended template: Node.gitignore
 
+.vuepress/dist
 node_modules/
