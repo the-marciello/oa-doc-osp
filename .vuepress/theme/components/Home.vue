@@ -39,11 +39,6 @@
 
     <Content class="theme-default-content custom"/>
 
-    <div
-      class="footer"
-      v-if="data.footer">
-      {{ data.footer }}
-    </div>
   </main>
 </template>
 
@@ -51,7 +46,7 @@
 import NavLink from '@theme/components/NavLink.vue'
 
 export default {
-  components: { NavLink },
+  components: { NavLink},
 
   computed: {
     data () {
@@ -66,6 +61,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style lang="stylus">
