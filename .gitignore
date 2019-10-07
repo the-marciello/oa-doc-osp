@@ -1,0 +1,8 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Vue template
+# gitignore template for Vue.js projects
+#
+# Recommended template: Node.gitignore
+
+.vuepress/
+node_modules/
