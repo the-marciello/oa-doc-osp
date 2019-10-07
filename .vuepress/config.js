@@ -8,5 +8,15 @@ module.exports = {
         ],
         sidebar: 'auto',
         footer: 'auto'
-        }
+        },
+    plugins: [
+        [
+            'vuepress-plugin-clean-urls',
+            {
+                normalSuffix: '/',
+                indexSuffix: '/',
+                notFoundPath: '/404.html',
+            },
+        ],
+    ],
     };
