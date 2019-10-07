@@ -1,0 +1,20 @@
+{
+  "name": "oa-doc-out",
+  "version": "1.0.0",
+  "description": "Offline Agency external documentation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:build": "vuepress build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/matteogiacomo/oa-doc-out.git"
+  },
+  "author": "Offline Agency",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/matteogiacomo/oa-doc-out#readme",
+  "dependencies": {
+    "vuepress": "^0.12.0"
+  }
+}
