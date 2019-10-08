@@ -8,7 +8,6 @@ actionLink:
 heroTitle: Overview
 projectTypes: 
 - title: Laravel
-- title: Other
 projects:
 - title: laravel-mongo-auto-sync
   link: /laravel-mongo-auto-sync
