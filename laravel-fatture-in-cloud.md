@@ -1,18 +1,13 @@
 ---
 meta:
   - name: description
-    content: An integration plugin with Fatture in Cloud Api written in [Laravel](https://laravel.com/) PHP.
+    content: This Laravel wrapper allows you to integrate a Laravel e-commerce platform with the invoicing program Fatture in Cloud using Api.
 gitName: laravel-fatture-in-cloud
 ---
 
 # laravel-fatture-in-cloud
-An integration plugin with [Fatture in Cloud](https://fattureincloud.it) Api written in Laravel PHP.
 
-## Introduction
-
-A wrapper which allows you to integrate a [Laravel](https://laravel.com/) e-commerce platform with the invoicing program [Fatture in Cloud](https://fattureincloud.it).
-
-With [Fatture in Cloud](https://fattureincloud.it) you can generate online invoices, electronic invoices (B2B, B2C and PA), estimates and you can check profits and costs from your computer or from Android and iOS smartphones and tablets.
+This Laravel wrapper allows you to integrate a Laravel e-commerce platform with the invoicing program [Fatture in Cloud](https://fattureincloud.it) using Api.
 
 ## Installation and setup
 

@@ -6,7 +6,7 @@ gitName: laravel-mongo-auto-sync
 ---
 
 # laravel-mongo-auto-sync
-A package that allow to sync changes between collections on MongoDB projects.
+A package that allow to sync changes between collections on [MongoDB](https://www.mongodb.com) projects.
 
 ## Questions & issues
 Find yourself stuck using the package? Found a bug? Do you have general questions or suggestions for improving the package? Feel free to create an issue on [GitHub](https://github.com/offline-agency/laravel-mongo-auto-sync/issues), we’ll try to address it as soon as possible.
