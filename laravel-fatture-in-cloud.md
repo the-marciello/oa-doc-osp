@@ -1,54 +1,108 @@
 ---
 meta:
   - name: description
-    content: An integration plugin with Fatture in Cloud Api written in Laravel PHP.
+    content: An integration plugin with Fatture in Cloud Api written in [Laravel](https://laravel.com/) PHP.
 gitName: laravel-fatture-in-cloud
 ---
 
 # laravel-fatture-in-cloud
-An integration plugin with Fatture in Cloud Api written in Laravel PHP.
+An integration plugin with [Fatture in Cloud](https://fattureincloud.it) Api written in Laravel PHP.
 
 ## Introduction
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor nisl, suscipit id feugiat eget, elementum sit amet ipsum. In mollis massa ac est interdum euismod. Duis laoreet, nisl eget finibus tincidunt, nibh elit auctor neque, et viverra eros ipsum eu justo. Pellentesque id ante faucibus, iaculis neque vitae, molestie neque. Nulla volutpat nisi est, id feugiat dui porttitor non. Proin consectetur nulla non leo faucibus posuere. Aenean pellentesque elit non fringilla venenatis. Duis sollicitudin eros leo, a imperdiet odio rhoncus vel. Vivamus lacinia est nunc, at vestibulum velit molestie eu. Mauris interdum sapien vel nisl ultrices mollis. Pellentesque ac dictum urna.
+A wrapper which allows you to integrate a [Laravel](https://laravel.com/) e-commerce platform with the invoicing program [Fatture in Cloud](https://fattureincloud.it).
 
-## Requirements
+With [Fatture in Cloud](https://fattureincloud.it) you can generate online invoices, electronic invoices (B2B, B2C and PA), estimates and you can check profits and costs from your computer or from Android and iOS smartphones and tablets.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor nisl, suscipit id feugiat eget, elementum sit amet ipsum. In mollis massa ac est interdum euismod. Duis laoreet, nisl eget finibus tincidunt, nibh elit auctor neque, et viverra eros ipsum eu justo. Pellentesque id ante faucibus, iaculis neque vitae, molestie neque. Nulla volutpat nisi est, id feugiat dui porttitor non. Proin consectetur nulla non leo faucibus posuere. Aenean pellentesque elit non fringilla venenatis. Duis sollicitudin eros leo, a imperdiet odio rhoncus vel. Vivamus lacinia est nunc, at vestibulum velit molestie eu. Mauris interdum sapien vel nisl ultrices mollis. Pellentesque ac dictum urna.
+## Installation and setup
 
-## Installation and Setup
+### Basic installation
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor nisl, suscipit id feugiat eget, elementum sit amet ipsum. In mollis massa ac est interdum euismod. Duis laoreet, nisl eget finibus tincidunt, nibh elit auctor neque, et viverra eros ipsum eu justo. Pellentesque id ante faucibus, iaculis neque vitae, molestie neque. Nulla volutpat nisi est, id feugiat dui porttitor non. Proin consectetur nulla non leo faucibus posuere. Aenean pellentesque elit non fringilla venenatis. Duis sollicitudin eros leo, a imperdiet odio rhoncus vel. Vivamus lacinia est nunc, at vestibulum velit molestie eu. Mauris interdum sapien vel nisl ultrices mollis. Pellentesque ac dictum urna.
+You can install this package via composer using:
+
+``` bash 
+composer require offline-agency/laravel-fatture-in-cloud
+```
+    
+The package will automatically register its service provider.
+
+To publish the config file to `config/backup.php` run:
+
+``` bash 
+php artisan vendor:publish --provider="OfflineAgency\FattureInCloud\FattureInCloudServiceProvider" --tag="config"    
+```
+
+### First configuration
+
+This is the default contents of the configuration:
+
+``` php
+return [
+    'api_uid' => env('FATTURE_CLOUD_API_UID'),
+    'api_key' => env('FATTURE_CLOUD_API_KEY'),
+    "endpoint" => "https://api.fattureincloud.it/v1/",
+    "errors" => [
+        "0" => [
+            "code" => 400,
+            "message" => "Errore generico."
+        ],
+        "1000" => [
+            "code" => 401,
+            "message" => "Autenticazione fallita. I parametri di utlizzo 'api_uid' e 'api_key' non sono validi."
+        ],
+        "1001" => [
+            "code" => 400,
+            "message" => "Uno dei parametri è mancante o non valido."
+        ],
+        "1004" => [
+            "code" => 404,
+            "message" => "L'azienda non esiste o è stata disabilitata."
+        ],
+        "1100" => [
+            "code" => 400,
+            "message" => "Il contenuto della richiesta non è corretto (probabilmente il json non è formattato correttamente)."
+        ],
+        "2000" => [
+            "code" => 401,
+            "message" => "La licenza è scaduta."
+        ],
+        "2002" => [
+            "code" => 420,
+            "message" => "Uno dei limiti di richieste (al minuto, orario o annuale) è stato superato."
+        ],
+        "2004" => [
+            "code" => 403,
+            "message" => "L'utilizzo delle API è stato bloccato per questo account."
+        ],
+        "2005" => [
+            "code" => 403,
+            "message" => "La licenza non consente l'utilizzo di questa funzione."
+        ],
+        "2006" => [
+            "code" => 403,
+            "message" => "L'accesso ai dati richiesti è ristretto."
+        ],
+        "4001" => [
+            "code" => 420,
+            "message" => "Non è possibile completare la richiesta perché è stato raggiunto il limite massimo di anagrafiche."
+        ]
+    ]
+];
+``` 
+
+Add this key in your `.env` file.
+        
+    FATTURE_CLOUD_API_UID = API UID;
+    FATTURE_CLOUD_API_KEY = API KEY;
+ 
+Then replace `API UID` and `API KEY` with the values you find in the API section of your [Fatture in Cloud](https://fattureincloud.it) account (see image below).
+
+![Fatture in Cloud API section](./assets/images/fatture-in-cloud-api-section.png "Fatture in Cloud API section")
 
 ## Questions & issues
+Find yourself stuck using the package? Found a bug? Do you have general questions or suggestions for improving the plugin? Feel free to create an issue on [GitHub](https://github.com/offline-agency/laravel-fatture-in-cloud/issues), we’ll try to address it as soon as possible.
 
-Find yourself stuck using the package? Found a bug? Do you have general questions or suggestions for improving the backup package? Feel free to [create an issue on GitHub](), we’ll try to address it as soon as possible.
-
-If you’ve found a bug regarding security please mail <support@offlineagency.it> instead of using the issue tracker.
-
-## Changelog
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor nisl, suscipit id feugiat eget, elementum sit amet ipsum. In mollis massa ac est interdum euismod. Duis laoreet, nisl eget finibus tincidunt, nibh elit auctor neque, et viverra eros ipsum eu justo. Pellentesque id ante faucibus, iaculis neque vitae, molestie neque. Nulla volutpat nisi est, id feugiat dui porttitor non. Proin consectetur nulla non leo faucibus posuere. Aenean pellentesque elit non fringilla venenatis. Duis sollicitudin eros leo, a imperdiet odio rhoncus vel. Vivamus lacinia est nunc, at vestibulum velit molestie eu. Mauris interdum sapien vel nisl ultrices mollis. Pellentesque ac dictum urna.
-
-## Upgrading
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor nisl, suscipit id feugiat eget, elementum sit amet ipsum. In mollis massa ac est interdum euismod. Duis laoreet, nisl eget finibus tincidunt, nibh elit auctor neque, et viverra eros ipsum eu justo. Pellentesque id ante faucibus, iaculis neque vitae, molestie neque. Nulla volutpat nisi est, id feugiat dui porttitor non. Proin consectetur nulla non leo faucibus posuere. Aenean pellentesque elit non fringilla venenatis. Duis sollicitudin eros leo, a imperdiet odio rhoncus vel. Vivamus lacinia est nunc, at vestibulum velit molestie eu. Mauris interdum sapien vel nisl ultrices mollis. Pellentesque ac dictum urna.
-
-## Usage
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor nisl, suscipit id feugiat eget, elementum sit amet ipsum. In mollis massa ac est interdum euismod. Duis laoreet, nisl eget finibus tincidunt, nibh elit auctor neque, et viverra eros ipsum eu justo. Pellentesque id ante faucibus, iaculis neque vitae, molestie neque. Nulla volutpat nisi est, id feugiat dui porttitor non. Proin consectetur nulla non leo faucibus posuere. Aenean pellentesque elit non fringilla venenatis. Duis sollicitudin eros leo, a imperdiet odio rhoncus vel. Vivamus lacinia est nunc, at vestibulum velit molestie eu. Mauris interdum sapien vel nisl ultrices mollis. Pellentesque ac dictum urna.
-
-### Usage 1
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor nisl, suscipit id feugiat eget, elementum sit amet ipsum. In mollis massa ac est interdum euismod. Duis laoreet, nisl eget finibus tincidunt, nibh elit auctor neque, et viverra eros ipsum eu justo. Pellentesque id ante faucibus, iaculis neque vitae, molestie neque. Nulla volutpat nisi est, id feugiat dui porttitor non. Proin consectetur nulla non leo faucibus posuere. Aenean pellentesque elit non fringilla venenatis. Duis sollicitudin eros leo, a imperdiet odio rhoncus vel. Vivamus lacinia est nunc, at vestibulum velit molestie eu. Mauris interdum sapien vel nisl ultrices mollis. Pellentesque ac dictum urna.
-
-## Advanced usage
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor nisl, suscipit id feugiat eget, elementum sit amet ipsum. In mollis massa ac est interdum euismod. Duis laoreet, nisl eget finibus tincidunt, nibh elit auctor neque, et viverra eros ipsum eu justo. Pellentesque id ante faucibus, iaculis neque vitae, molestie neque. Nulla volutpat nisi est, id feugiat dui porttitor non. Proin consectetur nulla non leo faucibus posuere. Aenean pellentesque elit non fringilla venenatis. Duis sollicitudin eros leo, a imperdiet odio rhoncus vel. Vivamus lacinia est nunc, at vestibulum velit molestie eu. Mauris interdum sapien vel nisl ultrices mollis. Pellentesque ac dictum urna.
-
-### Usage 1
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor nisl, suscipit id feugiat eget, elementum sit amet ipsum. In mollis massa ac est interdum euismod. Duis laoreet, nisl eget finibus tincidunt, nibh elit auctor neque, et viverra eros ipsum eu justo. Pellentesque id ante faucibus, iaculis neque vitae, molestie neque. Nulla volutpat nisi est, id feugiat dui porttitor non. Proin consectetur nulla non leo faucibus posuere. Aenean pellentesque elit non fringilla venenatis. Duis sollicitudin eros leo, a imperdiet odio rhoncus vel. Vivamus lacinia est nunc, at vestibulum velit molestie eu. Mauris interdum sapien vel nisl ultrices mollis. Pellentesque ac dictum urna.
+If you’ve found a bug regarding security please mail <support@offlineagency.com> instead of using the issue tracker.
 
 ## About Us
 
