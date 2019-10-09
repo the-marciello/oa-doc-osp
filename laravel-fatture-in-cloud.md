@@ -87,10 +87,10 @@ return [
 
 Add this key in your `.env` file.
         
-    FATTURE_CLOUD_API_UID = API UID;
-    FATTURE_CLOUD_API_KEY = API KEY;
+    FATTURE_CLOUD_API_UID = <your_api_uid>;
+    FATTURE_CLOUD_API_KEY = <your_api_key>;
  
-Then replace `API UID` and `API KEY` with the values you find in the API section of your [Fatture in Cloud](https://fattureincloud.it) account (see image below).
+Then replace `API UID` and `API KEY` with the values you find in the API section of your [Fatture in Cloud](https://secure.fattureincloud.it/api) account (see image below).
 
 ![Fatture in Cloud API section](./assets/images/fatture-in-cloud-api-section.png "Fatture in Cloud API section")
 
