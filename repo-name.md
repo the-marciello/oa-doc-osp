@@ -1,3 +1,9 @@
+---
+meta:
+  - name: description
+    content: 
+gitName: 
+---
 
 # repo-name
 A package that allow to sync changes between collections on MongoDB project.

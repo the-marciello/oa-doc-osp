@@ -1,9 +1,12 @@
 ---
+meta:
+  - name: description
+    content: A Laravel package that allow to sync changes between collections on MongoDB projects.
 gitName: laravel-mongo-auto-sync
 ---
 
 # laravel-mongo-auto-sync
-A package that allow to sync changes between collections on MongoDB project.
+A package that allow to sync changes between collections on MongoDB projects.
 
 ## Introduction
 

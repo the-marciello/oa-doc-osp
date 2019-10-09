@@ -1,4 +1,7 @@
 ---
+meta:
+  - name: description
+    content: An integration plugin with Fatture in Cloud Api written in Laravel PHP.
 gitName: laravel-fatture-in-cloud
 ---
 
