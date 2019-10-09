@@ -8,7 +8,6 @@ actionLink:
 heroTitle: Overview
 projectTypes: 
 - title: Laravel
-- title: Other
 projects:
 - title: laravel-mongo-auto-sync
   link: /laravel-mongo-auto-sync
@@ -18,10 +17,6 @@ projects:
   link: /laravel-fatture-in-cloud
   type: Laravel
   details: An integration plugin with Fatture in Cloud Api written in Laravel PHP.
-- title: Repo Name
-  link: /repo-name
-  type: Other
-  details: Desc Repo.
 - title: 
   link: 
   details: 
