@@ -10,94 +10,314 @@ A package that allow to sync changes between collections on [MongoDB](https://ww
 
 ## Installation and Setup
 
+### Prerequisites
+
+This package is build on top of [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb) v3 and for this reason you have to install mongo driver before using it. Follow this simple steps to install it.
+
+Open your terminal and run:
+
+``` bash
+# install pear
+curl -O https://pear.php.net/go-pear.phar
+
+# install mongoDB PHP driver
+sudo pecl install mongodb
+```     
+
 ### Basic Installation
 
-::: warning
-Description
-:::
+You can install this package via composer using:
+
+``` bash 
+composer require offlineagency/laravel-mongo-auto-sync
+```
 
 ### How does it work
 
-::: warning
-Description
+::: danger
+GF
 :::
 
-### Prima di Iniziare 
+### Before starting 
 
-::: warning
-Description - Pensavo di inserire una piccola "presentazione" su come è gestita la doc e una brevissima presentazione sulla logica degli esempi.
-:::
+In this documentation reference is made to Article and ArticleCategory collection to explain the powerful of this package.
 
-::: tip 
-Examples
-:::
+Between them exist a [relation](#relationships) defined like this:
+
+- Article [EmbedsOne](#embedsone) ArticleCategory
+- ArticleCategory [EmbedsMany](#embedsmany) Article
 
 ## Model 
 
-::: warning
-Description
+In this section we will see how to build a model, from the definition of the fields until the creation of [relationships](#relationships).
+
+Before starting we look to the end result that will be created step by step in this documentation.
+
+::: danger
+TODO: add image sync explain
 :::
 
-### Attributes
+#### Article
 
-::: warning
-Description
+``` php
+
+<?php
+
+namespace App\Models;
+
+use OfflineAgency\MongoAutoSync\Http\Models\MDModel;
+
+/**
+ *
+ * Plain Fields
+ *
+ * @property string $id
+ * @property array $title
+ * @property string $slug
+ * @property array $content
+ * @property $planned_date
+ *
+ **/
+
+/**
+ *
+ * Relationship
+ *
+ * @property MiniCategory articleCategory
+ * 
+ **/
+
+class Article extends MDModel
+{
+    protected $collection = 'article';
+
+    protected $items = array(
+        'title' => array(
+            'is-ml' => true,
+        ),
+        'slug' => array(),
+        'content' => array(
+            'is-ml' => true,
+        ),
+        'planned_date' => array(
+            'is-md' => true
+        )
+    );
+
+    protected $dates = array(
+        'creation_date',
+        'publication_date'
+    );
+
+    protected $mongoRelation = array(
+        'articleCategory' => array(
+            'type' => 'EmbedsOne',
+            'mode' => 'classic',
+            'model' => 'App\Models\MiniCategory',
+            'modelTarget' => 'App\Models\ArticleCategory',
+            'methodOnTarget' => 'articlelist',
+            'modelOnTarget' => 'App\Models\MiniArticle',
+        ),
+    );
+
+    public function articleCategory()
+    {
+        return $this->embedsOne('App\Models\MiniCategory');
+    }
+}
+```
+
+#### Article Category
+
+``` php
+<?php
+
+namespace App\Models;
+
+use OfflineAgency\MongoAutoSync\Http\Models\MDModel;
+
+/**
+ *
+ * Plain Fields
+ *
+ * @property string $id
+ * @property array $name
+ * @property string $slug
+ * @property array $description
+ * @property string $img
+ *
+ **/
+
+/**
+ *
+ * Relationship
+ *
+ * @property MiniArticle $articleList
+ *
+ **/
+
+class ArticleCategory extends MDModel
+{
+    protected $collection = 'articlecategory';
+
+    protected $items = array(
+        'name'        => array(
+            'is-ml' => true,
+        ),
+        'slug'       => array(),
+        'description' => array(
+            'is-ml' => true,
+        ),
+        'img' => array()
+    );
+
+    protected $mongoRelation = array(
+        'articlelist' => array(
+            'type'   => 'EmbedsMany',
+            'mode'   => 'classic',
+            'model' => 'App\Models\MiniArticle',
+            'modelTarget' => 'App\Models\Article',
+            'methodOnTarget' => 'articleCategory',
+            'modelOnTarget' => 'App\Models\MiniCategory',
+        ),
+    );
+
+    public function articlelist()
+    {
+        return $this->embedsMany('App\Models\MiniArticle');
+    }
+}
+```
+
+
+### Items Attribute
+
+First thing you have to create a new class, that will correspond with the collection that you want on DB, and it must extend [MDModel]()
+
+``` php
+class Article extends MDModel
+{
+    //
+}
+```
+
+Now you can define the collection and all the fields that you need. Those must be declared as array but default when you create a new object they will be saved as string
+
+``` php
+class Article extends MDModel
+{
+        protected $collection = 'article';
+    
+        protected $items = array(
+            'title' => array(),
+            'slug' => array(),
+            'content' => array(),
+            'planned_date' => array()
+        );
+}
+```
+
+::: danger
+Aggiungere breve anticipazione
 :::
 
-::: tip 
-Examples
-:::
+#### is-ml (multi-lingual)
 
-#### is-ml
+It creates an array of key-value pairs where the the language code (like "it_IT") will be the key and the text will be the value.
 
-::: warning
-Description
-:::
 
-::: tip 
-Examples
-:::
+``` php
+class Article extends MDModel
+{
+        protected $collection = 'article';
+    
+        protected $items = array(
+            'title' => array(
+                'is-ml' => true
+            ),
+            'slug' => array(),
+            'content' => array(
+                'is-ml' => true
+            ),
+            'planned_date' => array()
+        );
+}
+```
 
 #### is-md
 
-::: warning
-Description
+::: danger
+GF - description
 :::
 
-::: tip 
-Examples
-:::
+``` php
+class Article extends MDModel
+{
+        protected $collection = 'article';
+    
+        protected $items = array(
+            'title' => array(
+                'is-ml' => true
+            ),
+            'slug' => array(),
+            'content' => array(
+                'is-ml' => true
+            ),
+            'planned_date' => array(
+                'is-md' => true
+            )
+        );
+}
+```
 
 #### is-carbonDate
 
-::: warning
-Description
+::: danger
+GF - description
 :::
 
-::: tip 
-Examples
+::: danger 
+GF - Examples
 :::
 
 #### ia-array
 
-::: warning
-Description
+::: danger
+GF - description
 :::
 
-::: tip 
-Examples
+::: danger 
+GF - Examples
 :::
 
 #### dates
 
-::: warning
-Description
-:::
+You can also create an array where you indicate all the fields that you want are saved as dates.
 
-::: tip 
-Examples
-:::
-
+``` php
+class Article extends MDModel
+{
+        protected $collection = 'article';
+    
+        protected $items = array(
+            'title' => array(
+                'is-ml' => true
+            ),
+            'slug' => array(),
+            'content' => array(
+                'is-ml' => true
+            ),
+            'planned_date' => array(
+                'is-md' => true
+            )
+        );
+        
+        protected $dates = array(
+                'creation_date',
+                'publication_date'
+        );
+}
+```
 
 ### Relationships
 
@@ -105,28 +325,163 @@ Examples
 Description
 :::
 
-#### EmbedesOne
-
-::: warning
-Description
-:::
-
-::: tip 
-Examples
-:::
-
-#### EmbedesMany
-
-::: warning
-Description
-:::
-
-::: tip 
-Examples
-:::
-
 #### MiniModel
 
+As the name suggests MiniModel is a little model, a selection of fields from an another model that we will call father. In fact here you go to defined all the fields that you want copare in, for exaple, Article from ArticleCategory and vice-versa.
+
+The structure is the same of a normal model but they must extend [DefaultMini](): 
+
+``` php
+# MiniArticle
+use OfflineAgency\MongoAutoSync\Http\Models\DefaultMini;
+
+/**
+ *
+ * Plain Fields
+ *
+ * @property string $id
+ * @property string $ref_id
+ * @property array $title
+ * @property array $content
+ * @property $publication_date
+ *
+ **/
+
+class MiniArticle extends DefaultMini
+{
+    protected $items = array(
+        'ref_id' => array(),
+        'title' => array(
+            'is-ml' => true,
+        ),
+        'content' => array(
+            'is-ml' => true,
+        ),
+        'publication_date' => array()
+    );
+}
+
+# MiniCategory
+use OfflineAgency\MongoAutoSync\Http\Models\DefaultMini;
+
+/**
+ *
+ * Plain Fields
+ *
+ * @property string $id
+ * @property string $ref_id
+ * @property array $name
+ * @property array $description
+ * 
+ **/
+
+class MiniCategory extends DefaultMini
+{
+    protected $items = array(
+        'ref_id' => array(),
+        'name' => array(
+            'is-ml' => true,
+        ),
+        'description' => array(
+            'is-ml' => true,
+        )
+    );
+}
+```
+
+::: tip
+Use `ref_id` field to store the id from the father model.
+:::
+
+### Mongo Relation Attribute
+
+Now that you have understand what are MiniModels you are ready to create your first relation on your model. First of all you have to create an array that will contains all the relations that you need:
+
+``` php 
+class Article extends MDModel
+{
+    {...}
+    
+    protected $mongoRelation = array(
+        //
+    );
+}
+```
+
+``` php 
+class ArticleCategory extends MDModel
+{
+    {...}
+    
+    protected $mongoRelation = array(
+        //
+    );
+}
+```
+
+Then you can define your relation:
+
+``` php 
+class Article extends MDModel
+{
+    {...}
+    
+    protected $mongoRelation = array(
+        'articleCategory' => array(
+            'type' => 'EmbedsOne',
+            'mode' => 'classic',
+            'model' => 'App\Models\MiniCategory',
+            'modelTarget' => 'App\Models\ArticleCategory',
+            'methodOnTarget' => 'articlelist',
+            'modelOnTarget' => 'App\Models\MiniArticle',
+        ),
+    );
+}
+```
+
+``` php 
+class ArticleCategory extends MDModel
+{
+    {...}
+    
+    protected $mongoRelation = array(
+        'articlelist' => array(
+            'type'   => 'EmbedsMany',
+            'mode'   => 'classic',
+            'model' => 'App\Models\MiniArticle',
+            'modelTarget' => 'App\Models\Article',
+            'methodOnTarget' => 'articleCategory',
+            'modelOnTarget' => 'App\Models\MiniCategory',
+        ),
+    );
+}
+```
+
+Now analyze what you are wrote up here:
+
+- *type*: indicate the type of the relation and it can be [EmbedsOne](#embedsone) or [EmbedsMany](#embedsmany) METTERE GRASSETTO
+
+- mode: opzionale non utilizzato
+
+- model: is the MiniModel of the related collection
+
+- modelTarget: is the related collection
+
+- methodOnTarget: is the relation name on the model of the related collection
+
+- modelOnTarget: is the MiniModel of the current model
+
+::: danger
+Parlare della possibilità di mettere `'hasTarget' => false`
+::: 
+
+#### EmbedsOne
+
+
+
+
+#### EmbedsMany
+
 ::: warning
 Description
 :::
@@ -134,31 +489,20 @@ Description
 ::: tip 
 Examples
 :::
-
 
 ### Utilities
 
-#### Generate DOC
+#### Generate Model Documentation
 
-::: warning
-Description
-:::
+Mettere il link per la demo e scrivere solamente il comand.
 
-::: tip 
-Examples
-:::
+#### Drop Collection
 
-#### Create Trait
+Un altro comando da linkare e scrivere
 
-::: warning
-Description
-:::
+#### Check DB consistency
 
-::: tip 
-Examples
-:::
-
-
+Un altro comando che sarà nelle prossime release. Va a controllare che tutto qello che c'e nelle relazioni siapresente anche nei targhet e che tutti gli items siano presenti nella collection
 
 ## Store Operation
 
