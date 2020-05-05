@@ -493,7 +493,7 @@ class MiniCategory extends DefaultMini
 Use `ref_id` field to store the id from the father model.
 :::
 
-### Mongo Relation Attribute
+#### Mongo Relation Attribute
 
 Now that you have understand what are MiniModels you are ready to create your first relation on your model. First of all you have to create an array that will contains all the relations that you need:
 
@@ -655,17 +655,14 @@ In this way primary category will be saved in the article collection but article
 
 #### EmbedsOne
 
-
-
+::: warning
+Description
+:::
 
 #### EmbedsMany
 
 ::: warning
 Description
-:::
-
-::: tip 
-Examples
 :::
 
 ### Utilities
@@ -694,70 +691,279 @@ This command, which will be added probably in the next release [here](#checkdbco
 
 ### Description
 
-::: warning
-Description - Mettere un nome adeguato al posto di description
+#### Advantages
+
+As we have already said this package allows you to store an object that automatically will be stored in all collections where it has a relation. Following the above examples when a new article is stored it will appear in the category collection while categories and primary category will be saved under article.
+
+#### Images 
+::: danger 
+TODO: add images of article and category
 :::
 
 ### Usage
 
-::: tip 
-Examples - Uso base spiegato precedentemente
+First of all you have to create a function `store()` where you receive a `$request` in input.
+
+``` php
+<?php
+
+namespace App\Controller;
+
+use App\Http\Controllers\Controller;
+
+class ArticleController extends Controller
+{
+    public function store($request)
+    {
+        //
+    }
+}
+```
+
+Now you have to declare a new article instance.
+
+``` php
+<?php
+
+namespace App\Controller;
+
+use App\Http\Controllers\Controller;
+use App\Models\Aticle;
+
+class ArticleController extends Controller
+{
+    public function store($request)
+    {
+        $article = new Article;
+    }
+}
+```
+
+#### Field
+
+In `$request` you receive all the fields from a form. If they have the same name of the model they will be directly stored.
+
+::: danger 
+TODO: add an image of an article form where the user can insert title, content, planned_date, publication_date and categories.
 :::
 
-#### Relation
+But they may not be all the fields that you need. For this reason you can create an array where you declare others fields.
 
-::: warning
-Description
+``` php
+<?php
+
+namespace App\Controller;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use MongoDB\BSON\UTCDateTime;
+use DateTime;
+
+class ArticleController extends Controller
+{
+    public function store($request)
+    {
+        $arr = [
+           'slug' => Str::slug($request->input('title')),
+           'creation_date' => new UTCDateTime(new DateTime('now'))
+        ];
+    }
+}
+```
+
+#### Store With Relation
+
+Now you have to add the relationships. As first thing i suggest you to create new functions called `getCategories` and `getPrimaryCategory`:
+
+``` php
+<?php
+
+namespace App\Controller;
+
+use ...
+
+class ArticleController extends Controller
+{
+    public function store($request)
+    {
+        $article = new Article;
+                
+                $arr = [
+                    'slug' => Str::slug($request->input('title')),
+                    'creation_date' => new UTCDateTime(new DateTime('now')),
+                    'categories' => $this->getCategories($request->categories_id),
+                    'primaryCategory' => $this->getPrimaryCategories($request->categories_id)
+                ];
+    }
+
+    public function getCategories($categories_id)
+        {
+            //
+        }
+    
+        public function getPrimaryCategories($categories_id)
+        {
+            //
+        }
+}
+```
+
+::: tip
+Desrizione
 :::
 
-::: tip 
-Examples
+``` php
+<?php
+
+namespace App\Controller;
+
+use DateTime;
+use App\Models\Article;
+use App\Models\Category;
+use Illuminate\Support\Str;
+use MongoDB\BSON\UTCDateTime;
+use App\Http\Controllers\Controller;
+use stdClass;
+
+class ArticleController extends Controller
+{
+    public function store($request)
+    {
+        $article = new Article;
+
+        $arr = [
+            'slug' => Str::slug($request->input('title')),
+            'creation_date' => new UTCDateTime(new DateTime('now')),
+            'categories' => $this->getCategories($request->categories_id),
+            'primaryCategory' => $this->getPrimaryCategories($request->categories_id)
+        ];
+    }
+
+    public function getCategories($categories_id)
+    {
+        $arr = [];
+        $i = 0;
+
+        if ($categories_id != null) {
+            foreach ($categories_id as $category_id) {
+                $category = Category::find($category_id);
+
+                $newCategory = new stdClass();
+                $newCategory->ref_id = $category->id;
+                $newCategory->name = $category->name[cl()];
+                $newCategory->description = $category->description[cl()];
+
+                $arr[$i] = $newCategory;
+                $i++;
+            }
+            return json_encode($arr);
+        } else {
+            return null;
+        }
+    }
+
+    public function getPrimaryCategories($categories_id)
+    {
+        if ($categories_id != null && count($categories_id) > 0) {
+            $category = Category::find($categories_id[0]);
+
+            $newCategory = new stdClass();
+            $newCategory->ref_id = $category->id;
+            $newCategory->name = $category->name[cl()];
+            $newCategory->description = $category->description[cl()];
+
+            return json_encode($newCategory);
+        }else {
+            return null;
+        }
+    }
+}
+```
+
+Now you can save your new object using storeWithSync where you have to pass $request as first parameters and $arr as second.
+
+``` php
+<?php
+
+namespace App\Controller;
+
+use ...
+
+class ArticleController extends Controller
+{
+    public function store($request)
+    {
+        $article = new Article;
+
+        $arr = [
+            'slug' => Str::slug($request->input('title')),
+            'creation_date' => new UTCDateTime(new DateTime('now')),
+            'categories' => $this->getCategories($request->categories_id),
+            'primaryCategory' => $this->getPrimaryCategories($request->categories_id)
+        ];
+        
+        $article->storeWithSync($request, $arr);
+    }
+
+    public function getCategories($categories_id)
+    {
+        {...}
+    }
+
+    public function getPrimaryCategories($categories_id)
+    {
+        {...}
+    }
+}
+```
+
+#### Store Partial Request
+
+You can also decide to don't save the relation. In this case you have to add `$options`:
+
+``` php
+<?php
+
+namespace App\Controller;
+
+use ...
+
+class ArticleController extends Controller
+{
+    public function store($request)
+    {
+        $article = new Article;
+
+        $arr = [
+            'slug' => Str::slug($request->input('title')),
+            'creation_date' => new UTCDateTime(new DateTime('now'))
+        ];
+
+        $options = [
+            'request_type' => 'partial'            
+        ]
+        
+        $article->storeWithSync($request, $arr, $options);
+    }
+}
+```
+
+### Result
+
+#### With Relation
+The output with [Relation](#store-with-relation) will be like this:
+
+::: danger
+Add images
 :::
 
-#### Partial Request
+#### With Partial Request
 
-::: warning
-Description
-:::
+While the output using [Partial Request](#store-partial-request) will be like this:
 
-::: tip 
-Examples
-:::
-
-
-## Update Operation
-
-### Description
-
-::: warning
-Description - Mettere un nome adeguato al posto di description
-:::
-
-### Usage
-
-::: tip 
-Examples - Uso base spiegato precedentemente
-:::
-
-#### Relation
-
-::: warning
-Description
-:::
-
-::: tip 
-Examples
-:::
-
-#### Partial Request
-
-::: warning
-Description
-:::
-
-::: tip 
-Examples
-:::
+::: danger
+Add images
+::: 
 
 
 ## Destroy Operation
