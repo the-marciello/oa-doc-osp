@@ -773,7 +773,16 @@ class ArticleController extends Controller
 
 #### Store With Relation
 
-Now you have to add the relationships. As first thing i suggest you to create new functions called `getCategories` and `getPrimaryCategory`:
+Now you have to add the relationships. 
+
+You need a json that contains: 
+
+- EmbedsOne: an array with an object that has all the fields of the [MiniModel](#minimodel);
+- EmbedsMany: an array with an object for each, in this case, category that contains all the fields of the [MiniModel](#minimodel).
+
+Json was chosen to using in on frontend. 
+
+For example ypu can create new functions called `getCategories` and `getPrimaryCategory`:
 
 ``` php
 <?php
@@ -792,7 +801,7 @@ class ArticleController extends Controller
                     'slug' => Str::slug($request->input('title')),
                     'creation_date' => new UTCDateTime(new DateTime('now')),
                     'categories' => $this->getCategories($request->categories_id),
-                    'primaryCategory' => $this->getPrimaryCategories($request->categories_id)
+                    'primaryCategory' => $this->getPrimaryCategory($request->categories_id)
                 ];
     }
 
@@ -801,16 +810,14 @@ class ArticleController extends Controller
             //
         }
     
-        public function getPrimaryCategories($categories_id)
+        public function getPrimaryCategory($categories_id)
         {
             //
         }
 }
 ```
 
-::: tip
-Desrizione
-:::
+And now you can define your related objects:
 
 ``` php
 <?php
@@ -1052,11 +1059,7 @@ class ArticleController extends Controller
 
 #### Relation
 
-If you change a category or you delete one, you can simply save this modification following the rules explained in the store method.
-
-::: danger
-add reference
-:::
+If you change a category or you delete one, you can simply save this modification following the rules explained in the [store](#store-with-relation) method.
 
 #### Partial Request
 
