@@ -9,6 +9,18 @@ module.exports = {
         sidebar: 'auto',
         footer: 'auto'
         },
+    locales:{
+        '/': {
+            lang: 'en-US',
+            title: 'OA-DOC',
+            description: ''
+        },
+        '/it/': {
+            lang: 'it-IT',
+            title: 'OA-DOC',
+            description: ''
+        }
+    },
     plugins: [
         [
             'vuepress-plugin-clean-urls',
