@@ -966,20 +966,177 @@ Add images
 ::: 
 
 
-## Destroy Operation
+## Update Operation
 
 ### Description
 
-::: warning
-Description - Mettere un nome adeguato al posto di description
+#### Advantages
+
+Update With Sync allows you to edit an object in its collection and in all collection that it's in a relationships with in a simple and fast way. In fact, following the above examples, when an article is updated the modification will be stored on the items of the correlated collection. Vice-versa when a categories will be updated all the articles that have this categories will be updated. This allows you to save time and avoid mistakes.
+
+#### Images
+
+::: danger
+Add images
 :::
 
-### Usage
+### Usage 
 
-::: tip 
-Examples - Uso base spiegato precedentemente
+#### Field
+
+First of all you have to create an `update()` function where you receive `$request` and `$id` in input.
+
+``` php
+<?php
+
+namespace App\Controllers;
+
+use App\Http\Controllers\Controller;
+
+class ArticleController extends Controller
+{
+    public function update($id, $request)
+    {
+        //
+    }
+}
+```
+
+After that you can search the article with the `$id`, for example:
+
+``` php
+<?php
+
+namespace App\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Models\Article;
+
+class ArticleController extends Controller
+{
+    public function update($id, $request)
+    {
+        $article = Article::find($id);
+    }
+}
+```
+
+`$request` contains all the fields that you receive from the form and, as store, if they have the same name of the model they will be saved automatically.
+
+::: danger
+add images of the form
 :::
 
+But if you want edit a value that `$request` doesn’t contains, as for the store, you can create an array which contains this fields:
+
+``` php
+<?php
+
+namespace App\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Models\Article;
+
+class ArticleController extends Controller
+{
+    public function update($id, $request)
+    {
+        $article = Article::find($id);
+        
+        $arr = [
+            'slug' => Str::slug($request->input('title')) . '-updated'
+        ];
+    }
+}
+```
+
+#### Relation
+
+If you change a category or you delete one, you can simply save this modification following the rules explained in the store method.
+
+::: danger
+add reference
+:::
+
+#### Partial Request
+
+If you don’t edit any relation you can use partial request to ensure that the fields will be deleted.
+
+``` php
+<?php
+
+namespace App\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Models\Article;
+
+class ArticleController extends Controller
+{
+    public function update($id, $request)
+    {
+        $article = Article::find($id);
+        
+        $arr = [
+            'slug' => Str::slug($request->input('title')) . '-updated'
+        ];
+
+        $options = [
+            'request_type' => 'partial'
+        ];
+    }
+}
+```
+
+Now you can save your changes:
+
+``` php
+<?php
+
+namespace App\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Models\Article;
+
+class ArticleController extends Controller
+{
+    public function update($id, $request)
+    {
+        $article = Article::find($id);
+        
+        $arr = [
+            'slug' => Str::slug($request->input('title')) . '-updated'
+        ];
+
+        $options = [
+            'request_type' => 'partial'
+        ];
+
+        $article->updateWithSync($request, $arr, $options);
+    }
+}
+```
+
+### Result
+
+#### With Relation
+
+If you edit an object and its relation your result will look like this:
+::: danger
+add images
+:::
+
+#### With Partial Request
+
+If you edit only simple fields your result will look like this:
+::: danger
+add images
+:::
+
+## Destroy Operation
+
+::: danger
+GF
+:::
 
 ## Questions & issues
 Find yourself stuck using the package? Found a bug? Do you have general questions or suggestions for improving the package? Feel free to create an issue on [GitHub](https://github.com/offline-agency/laravel-mongo-auto-sync/issues), we’ll try to address it as soon as possible.
