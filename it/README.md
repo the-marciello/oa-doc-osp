@@ -11,7 +11,7 @@ projectTypes:
 projects:
 - title: laravel-mongo-auto-sync
   link: /it/laravel-mongo-auto-sync
-  details: Un pacchetto che permette la sincronizzazione delle modifiche tra le collection di un progetto MongoDB
+  details: Un pacchetto basato su laravel che permette la sincronizzazione delle modifiche tra le collection di un progetto MongoDB
   type: Laravel
 - title: laravel-fatture-in-cloud
   link: /it/laravel-fatture-in-cloud

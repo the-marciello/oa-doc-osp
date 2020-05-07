@@ -40,12 +40,12 @@ GF
 
 ### Before starting 
 
-In this documentation reference is made to Article and ArticleCategory collection to explain the powerful of this package.
+In this documentation reference is made to Article, Category e primaryCategory collection to explain the powerful of this package.
 
 Between them exist a [relation](#relationships) defined like this:
 
-- Article [EmbedsMany](#embedsmany) ArticleCategory
-- ArticleCategory [EmbedsMany](#embedsmany) Article
+- Article [EmbedsMany](#embedsmany) Category
+- Category [EmbedsMany](#embedsmany) Article
 
 
 - Article [EmbedsOne](#embedsone) PrimaryCategory
@@ -284,13 +284,12 @@ class Article extends MDModel
 ```
 
 ::: danger
-Aggiungere breve anticipazione
+Aggiungere breve anticipazione - tradurre
 :::
 
 #### is-ml (multi-lingual)
 
 It creates an array of key-value pairs where the the language code (like "it_IT") will be the key and the text will be the value.
-
 
 ``` php
 class Article extends MDModel
@@ -623,6 +622,7 @@ Now analyze what you are wrote up here:
 #### Target
 
 Targets are very important mainly for two reasons:
+
   - You use all the powerful of Eloquent;
   - You can access at the fields of the related collection like you access at the field of the collection
 
@@ -1057,11 +1057,11 @@ class ArticleController extends Controller
 }
 ```
 
-#### Relation
+#### Update With Relation
 
 If you change a category or you delete one, you can simply save this modification following the rules explained in the [store](#store-with-relation) method.
 
-#### Partial Request
+#### Update With Partial Request
 
 If you don’t edit any relation you can use partial request to ensure that the fields will be deleted.
 
