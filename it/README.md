@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: https://offlineagency.it/build/oa-assets/img/oa-eb.png
-heroText: Docuentazione Offline Agency
+heroText: Documentazione Offline Agency
 tagline: Guida globale all'utilizzo dei nostri pacchetti
 actionText: 
 actionLink: 

@@ -11,12 +11,12 @@ module.exports = {
         },
     locales:{
         '/': {
-            lang: 'en-US',
+            lang: 'English',
             title: 'OA-DOC',
             description: ''
         },
         '/it/': {
-            lang: 'it-IT',
+            lang: 'Italian',
             title: 'OA-DOC',
             description: ''
         }
