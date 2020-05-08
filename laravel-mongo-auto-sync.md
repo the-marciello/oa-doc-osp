@@ -283,9 +283,7 @@ class Article extends MDModel
 }
 ```
 
-::: danger
-Aggiungere breve anticipazione - tradurre
-:::
+If you need other field type you can use one of the option implemented in the package:
 
 #### is-ml (multi-lingual)
 
@@ -627,6 +625,7 @@ Targets are very important mainly for two reasons:
   - You can access at the fields of the related collection like you access at the field of the collection
 
 But you can also choose to don't use it, in this case the code became:
+
 ``` php
 class Article extends MDModel
 {
@@ -1124,6 +1123,7 @@ class ArticleController extends Controller
 #### With Relation
 
 If you edit an object and its relation your result will look like this:
+
 ::: danger
 add images
 :::
@@ -1131,6 +1131,7 @@ add images
 #### With Partial Request
 
 If you edit only simple fields your result will look like this:
+
 ::: danger
 add images
 :::
@@ -1142,17 +1143,16 @@ GF
 :::
 
 ## Questions & issues
+
 Find yourself stuck using the package? Found a bug? Do you have general questions or suggestions for improving the package? Feel free to create an issue on [GitHub](https://github.com/offline-agency/laravel-mongo-auto-sync/issues), we’ll try to address it as soon as possible.
 
 If you’ve found a bug regarding security please mail <support@offlineagency.com> instead of using the issue tracker.
-
 
 ## About Us
 
 [Offline Agency](https://offlineagency.it) is a webdesign agency based in Padua, Italy.
 
 Open source software is used in all projects we deliver. Laravel, Nginx, Ubuntu are just a few of the free pieces of software we use every single day. For this, we are very grateful. When we feel we have solved a problem in a way that can help other developers, we release our code as open source software on [GitHub](https://github.com/offline-agency).
-
 
 This package was made by [Giacomo Fabbian](https://github.com/Giacomo92). There are [many other contributors](https://github.com/offline-agency/laravel-mongo-auto-sync/graphs/contributors) who devoted time and effort to make this package better.
 

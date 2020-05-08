@@ -538,7 +538,7 @@ class PrimaryCategory extends MDModel
 }
 ```
 
-Oa si possono definire le relazione vere e proprie:
+Ora si possono definire le relazione vere e proprie:
 
 **Article**
 
@@ -696,14 +696,11 @@ drop:collection {collection_name}
 #### Check DB consistency
 
 ::: warning
-Verrà aggiunto a breve, probabilmente nella prossima release, e lo sarà reperibile [qui](#checkdbconsistency)
+Verrà aggiunto a breve, probabilmente nella prossima release, e sarà reperibile [qui](#checkdbconsistency)
 :::
 
-::: warning
-Sistemare la descrizione
+Questo comando controllerà che le relazioni vengano salvate nel modo corretto. Permetterà infatti di assicurarsi che tutti i MiniModel vengano salvati nel target e che tutti gli items vengano salvati nella colllection con cui si ha la relazione
 
-Questo comando controllerà che le relazioni vengano salvate nel modo corretto. Permetterà infatti di assicurarsi che tutti i MiniModel vengano salvati nel target e che tutti gli items vengano salvati nella colllection con cuui si ha la relazione
-:::
 
 ## Store Operation
 
@@ -1097,8 +1094,6 @@ GF
 
 Ti trovi bloccato nell'utilizzo del pacchetto? Trovi un bug? Hai domande o suggerimentiper migliorare il pacchetto? Sentiti libero di creare un issue su [GitHub](https://github.com/offline-agency/laravel-mongo-auto-sync/issues), proveremo a risolverlo il primna possibile.
 
-If you’ve found a bug regarding security please mail <support@offlineagency.com> instead of using the issue tracker.
-
 Se trovi dei problemi relativi alla sicurezza scrivi a <support@offlineagency.com>
 
 ## About Us
@@ -1106,8 +1101,6 @@ Se trovi dei problemi relativi alla sicurezza scrivi a <support@offlineagency.co
 [Offline Agency](https://offlineagency.it) è un agenzia di webdesign situata a Padova, in Italia
 
 In tutti i nostri progetti utilizziamo software open source. Laravel, Nginx e Ubunto sono solo alcuni dei pacchetti che utilizziamo qutidianamente. Inolte quando riteniamo di aver risolto una problematica comune a molti, rilasciamo il nostro codice su [GitHub](https://github.com/offline-agency) in modo da poter aiutare altri sviluppatori.
-
-This package was made by [Giacomo Fabbian](https://github.com/Giacomo92). There are [many other contributors](https://github.com/offline-agency/laravel-mongo-auto-sync/graphs/contributors) who devoted time and effort to make this package better.
 
 Questo pacchetto è stato ideato e creato da [Giacomo Fabbian](https://github.com/Giacomo92). Ci sono inoltre molti [altri collaboratori](https://github.com/offline-agency/laravel-mongo-auto-sync/graphs/contributors) che hanno devoluto tempo e forza alla realizzazzione di questo progetto e al suo miglioramento.
 
