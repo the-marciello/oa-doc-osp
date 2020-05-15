@@ -683,6 +683,52 @@ Per farlo basta utilizzare il comando [GenerateModelDocumentatio](#generatemodel
 php artisan model-doc:generate {collection_name}
 ```
 
+::: tip 
+Il parametro `collection_name` può essere scritto sia in maiuscolo che in minuscolo.
+:::
+
+La documentazione così generata sarà simile a questa:
+
+``` php
+/**
+ *
+ * Plain Fields
+ *
+ * @property string $id
+ * @property array $title
+ * @property string $slug
+ * @property array $content
+ * @property $planned_date
+ *
+ * Relationship
+ *
+ * @property MiniCategory
+ *
+ **/
+```
+
+Il comando controlla inoltre la presenza del model nel progetto e in caso questo non ci sia lancierà un’eccezzione di questo tipo:
+`Error: collection_name Model not found`
+
+E’ inoltre possibile cambiare il percorso dei model nell’apposito file di configurazione situato su `config\laravel-mongo-auto-sync.php`:
+
+``` php
+<?php
+
+return [
+    'model_path' => app_path() . '/Models',
+    'model_namespace' => 'App\Models',
+    'other_models' => [
+        'user' => [
+            'model_path' => app_path(),
+            'model_namespace' => 'App'
+        ]
+    ]
+];
+```
+
+In questo modo il comando si adatterà alla struttura del vostro progetto.
+
 #### Drop Collection
 
 Se invece ci fosse la necessità di eliminare una collection basterà usare il comando [DropCollection](#dropcollection)
@@ -692,6 +738,32 @@ Basta lanciare nel proprio terminale:
 ``` bash
 drop:collection {collection_name}
 ```
+
+::: tip 
+Il parametro `collection_name` può essere scritto sia in maiuscolo che in minuscolo.
+:::
+
+Il comando controlla inoltre la presenza del model nel progetto e in caso questo non ci sia lancierà un’eccezzione di questo tipo:
+`Error: collection_name Model not found`
+
+E’ inoltre possibile cambiare il percorso dei model nell’apposito file di configurazione situato su `config\laravel-mongo-auto-sync.php`:
+
+``` php
+<?php
+
+return [
+    'model_path' => app_path() . '/Models',
+    'model_namespace' => 'App\Models',
+    'other_models' => [
+        'user' => [
+            'model_path' => app_path(),
+            'model_namespace' => 'App'
+        ]
+    ]
+];
+```
+
+In questo modo il comando si adatterà alla struttura del vostro progetto.
 
 #### Check DB consistency
 

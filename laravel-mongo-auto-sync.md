@@ -674,6 +674,52 @@ I suggest you to generate the PHP doc that takes to do a check when you save or 
 php artisan model-doc:generate {collection_name}
 ```
 
+::: tip
+You can write the collection_name with capital letter or small letter
+::: 
+
+The generated doc will be like this:
+
+``` php
+/**
+ *
+ * Plain Fields
+ *
+ * @property string $id
+ * @property array $title
+ * @property string $slug
+ * @property array $content
+ * @property $planned_date
+ *
+ * Relationship
+ *
+ * @property MiniCategory
+ *
+ **/
+```
+
+The command checks if the model exist in your project and if it doesn’t it print an error message like this:
+`Error: collection_name Model not found`
+
+You can also change your model path in this file `config\laravel-mongo-auto-sync.php`: 
+
+``` php
+<?php
+
+return [
+    'model_path' => app_path() . '/Models',
+    'model_namespace' => 'App\Models',
+    'other_models' => [
+        'user' => [
+            'model_path' => app_path(),
+            'model_namespace' => 'App'
+        ]
+    ]
+];
+```
+
+It allows you to keep the current project structure.
+
 #### Drop Collection
 
 If you need to drop a collection you can use [DropCollection](#dropcollection) command. Run in your terminal:
@@ -681,6 +727,32 @@ If you need to drop a collection you can use [DropCollection](#dropcollection) c
 ``` bash
 drop:collection {collection_name}
 ```
+
+::: tip
+You can write the collection_name with capital letter or small letter
+::: 
+
+The command checks if the model exist in your project and if it doesn’t it print an error message like this:
+`Error: collection_name Model not found`
+
+You can also change your model path in this file `config\laravel-mongo-auto-sync.php`: 
+
+``` php
+<?php
+
+return [
+    'model_path' => app_path() . '/Models',
+    'model_namespace' => 'App\Models',
+    'other_models' => [
+        'user' => [
+            'model_path' => app_path(),
+            'model_namespace' => 'App'
+        ]
+    ]
+];
+```
+
+It allows you to keep the current project structure.
 
 #### Check DB consistency
 
