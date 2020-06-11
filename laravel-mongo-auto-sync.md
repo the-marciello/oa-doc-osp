@@ -10,56 +10,170 @@ A package that allow to sync changes between collections on [MongoDB](https://ww
 
 ## Installation and Setup
 
-### Prerequisites
+Make sure you have the MongoDB PHP driver installed. You can find installation instructions at [http://php.net/manual/en/mongodb.installation.php](http://php.net/manual/en/mongodb.installation.php).
+This package is build on top of [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb) v3.6.x 
 
-This package is build on top of [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb) v3 and for this reason you have to install mongo driver before using it. Follow this simple steps to install it.
+### Laravel version Compatibility
 
-Open your terminal and run:
-
-``` bash
-# install pear
-curl -O https://pear.php.net/go-pear.phar
-
-# install mongoDB PHP driver
-sudo pecl install mongodb
-```     
+| Laravel     | Package     |
+| ----------- | ----------- |
+| 5.8.x       | 1.x         |
+| 6.x         | 1.x         |
+| 7.x         | <Badge text="to do" type="warning"/>         |
 
 ### Basic Installation
 
-You can install this package via composer using:
+Install the package via Composer:
 
 ``` bash 
 composer require offlineagency/laravel-mongo-auto-sync
 ```
 
-### How does it work
-
-::: danger
-GF
-:::
-
 ### Before starting 
 
-In this documentation reference is made to Article, Category e primaryCategory collection to explain the powerful of this package.
+To understand how the package works we see an example based on the following [MongoDB relationships](https://docs.mongodb.com/manual/applications/data-models-relationships/):
 
-Between them exist a [relation](#relationships) defined like this:
+- Article [EmbedsMany](https://docs.mongodb.com/manual/tutorial/model-embedded-one-to-many-relationships-between-documents/) Category
+- Category [EmbedsMany](https://docs.mongodb.com/manual/tutorial/model-embedded-one-to-many-relationships-between-documents/) Article
+- Article [EmbedsOne](https://docs.mongodb.com/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/) PrimaryCategory
+- PrimaryCategory [EmbedsMany](https://docs.mongodb.com/manual/tutorial/model-embedded-one-to-many-relationships-between-documents/) Article
 
-- Article [EmbedsMany](#embedsmany) Category
-- Category [EmbedsMany](#embedsmany) Article
+## Model setup
+
+1. Your model has to extend our [MDModel](https://github.com/offline-agency/laravel-mongo-auto-sync/blob/master/src/Http/Models/MDModel.php) class in order to use our extended methods for CRUD operations.
+
+2. Add 
 
 
-- Article [EmbedsOne](#embedsone) PrimaryCategory
-- PrimaryCategory [EmbedsMany](#embedsmany) Article
 
-## Model 
+### Items
 
-In this section we will see how to build a model, from the definition of the fields until the creation of [relationships](#relationships).
 
-Before starting we look to the end result that will be created step by step in this documentation.
 
-::: danger
-TODO: add image sync explain
-:::
+``` php
+class Article extends MDModel
+{
+    //
+}
+```
+
+Now you can define the collection and all the fields that you need. Those must be declared as array but default when you create a new object they will be saved as string
+
+``` php
+class Article extends MDModel
+{
+        protected $collection = 'article';
+    
+        protected $items = [
+            'title' => [],
+            'slug' => [],
+            'content' => [],
+            'planned_date' => []
+        ];
+}
+```
+
+If you need other field type you can use one of the option implemented in the package:
+
+#### is-ml (multi-lingual)
+
+It creates an array of key-value pairs where the the language code (like "it_IT") will be the key and the text will be the value.
+
+``` php
+class Article extends MDModel
+{
+        protected $collection = 'article';
+    
+        protected $items = [
+            'title' => [
+                'is-ml' => true
+            ],
+            'slug' => [],
+            'content' => [
+                'is-ml' => true
+            ],
+            'planned_date' => []
+        ];
+}
+```
+
+#### is-md
+
+It creates a mongo-date field.
+
+``` php
+class Article extends MDModel
+{
+        protected $collection = 'article';
+    
+        protected $items = [
+            'title' => [
+                'is-ml' => true
+            ],
+            'slug' => [],
+            'content' => [
+                'is-ml' => true
+            ],
+            'planned_date' => [
+                'is-md' => true
+            ]
+        ];
+}
+```
+
+#### is-carbon-date
+
+It creates a [carbon](https://carbon.nesbot.com/) field with which is easier make operations.
+
+``` php
+class Article extends MDModel
+{
+        protected $collection = 'article';
+    
+        protected $items = [
+            'title' => [
+                'is-ml' => true
+            ],
+            'slug' => [],
+            'content' => [
+                'is-ml' => true
+            ],
+            'planned_date' => [
+                'is-carbon-date' => true
+            ]
+        ];
+}
+```
+
+#### is-array
+
+It creates an array field where you can save different information between an object and the others.
+
+``` php
+class Article extends MDModel
+{
+        protected $collection = 'article';
+    
+        protected $items = [
+            'title' => [
+                'is-ml' => true
+            ],
+            'slug' => [],
+            'content' => [
+                'is-array' => true
+            ],
+            'planned_date' => [
+                'is-md' => true
+            ]
+        ];
+        
+        protected $mongoRelation = [
+            //
+        ];
+}
+```
+
+### Results
 
 #### Article
 
@@ -201,42 +315,7 @@ class Category extends MDModel
 #### Primary Category
 
 ``` php
-<?php
-
-namespace App\Models;
-
-use OfflineAgency\MongoAutoSync\Http\Models\MDModel;
-
-/**
- *
- * Plain Fields
- *
- * @property string $id
- * @property array $name
- * @property string $slug
- * @property array $description
- * @property string $img
- *
- * Relationship
- *
- * @property MiniArticle
- *
- **/
-
-class PrimaryCategory extends MDModel
-{
-    protected $collection = 'primaryCategory';
-
-    protected $items = [
-        'name' => [
-            'is-ml' => true,
-        ],
-        'slug' => [],
-        'description' => [
-            'is-ml' => true,
-        ],
-        'img' => []
-    ];
+<\    ];
 
     protected $mongoRelation = [
         'articles' => [
@@ -256,282 +335,7 @@ class PrimaryCategory extends MDModel
 }
 ```
 
-### Items Attribute
-
-First thing you have to create a new class, that will correspond with the collection that you want on DB, and it must extend [MDModel]()
-
-``` php
-class Article extends MDModel
-{
-    //
-}
-```
-
-Now you can define the collection and all the fields that you need. Those must be declared as array but default when you create a new object they will be saved as string
-
-``` php
-class Article extends MDModel
-{
-        protected $collection = 'article';
-    
-        protected $items = [
-            'title' => [],
-            'slug' => [],
-            'content' => [],
-            'planned_date' => []
-        ];
-}
-```
-
-If you need other field type you can use one of the option implemented in the package:
-
-#### is-ml (multi-lingual)
-
-It creates an array of key-value pairs where the the language code (like "it_IT") will be the key and the text will be the value.
-
-``` php
-class Article extends MDModel
-{
-        protected $collection = 'article';
-    
-        protected $items = [
-            'title' => [
-                'is-ml' => true
-            ],
-            'slug' => [],
-            'content' => [
-                'is-ml' => true
-            ],
-            'planned_date' => []
-        ];
-}
-```
-
-#### is-md
-
-It creates a mongo-date field.
-
-``` php
-class Article extends MDModel
-{
-        protected $collection = 'article';
-    
-        protected $items = [
-            'title' => [
-                'is-ml' => true
-            ],
-            'slug' => [],
-            'content' => [
-                'is-ml' => true
-            ],
-            'planned_date' => [
-                'is-md' => true
-            ]
-        ];
-}
-```
-
-#### is-carbon-date
-
-It creates a [carbon](https://carbon.nesbot.com/) field with which is easier make operations.
-
-``` php
-class Article extends MDModel
-{
-        protected $collection = 'article';
-    
-        protected $items = [
-            'title' => [
-                'is-ml' => true
-            ],
-            'slug' => [],
-            'content' => [
-                'is-ml' => true
-            ],
-            'planned_date' => [
-                'is-carbon-date' => true
-            ]
-        ];
-}
-```
-
-#### is-array
-
-It creates an array field where you can save different information between an object and the others.
-
-``` php
-class Article extends MDModel
-{
-        protected $collection = 'article';
-    
-        protected $items = [
-            'title' => [
-                'is-ml' => true
-            ],
-            'slug' => [],
-            'content' => [
-                'is-array' => true
-            ],
-            'planned_date' => [
-                'is-md' => true
-            ]
-        ];
-}
-```
-
-#### dates
-
-You can also create an array where you indicate all the fields that you want are saved as mongo-date.
-
-``` php
-class Article extends MDModel
-{
-        protected $collection = 'article';
-    
-        protected $items = [
-            'title' => [
-                'is-ml' => true
-            ],
-            'slug' => [],
-            'content' => [
-                'is-ml' => true
-            ],
-            'planned_date' => [
-                'is-md' => true
-            ]
-        ];
-        
-        protected $dates = [
-                'creation_date',
-                'publication_date'
-        ];
-}
-```
-
-::: warning
-You can choose this method or [is-md](#is-md) while the field that you want are save as carbon with [is-carbon-date](#is-carbon-date) method must be specified here.
-:::
-
-### Relationships
-
-::: warning
-Description
-:::
-
-#### MiniModel
-
-As the name suggests MiniModel is a little model, a selection of fields from an another model that we will call father. In fact here you go to defined all the fields that you want copare in, for exaple, Article from ArticleCategory and vice-versa.
-
-The structure is the same of a normal model but they must extend [DefaultMini](): 
-
-**MiniArticle**
-
-``` php
-use OfflineAgency\MongoAutoSync\Http\Models\DefaultMini;
-
-/**
- *
- * Plain Fields
- *
- * @property string $id
- * @property string $ref_id
- * @property array $title
- * @property array $content
- * @property $publication_date
- *
- **/
-
-class MiniArticle extends DefaultMini
-{
-    protected $items = [
-        'ref_id' => [],
-        'title' => [
-            'is-ml' => true,
-        ],
-        'content' => [
-            'is-ml' => true,
-        ],
-        'publication_date' => []
-    ];
-}
-```
-
-**MiniCategory**
-
-``` php
-use OfflineAgency\MongoAutoSync\Http\Models\DefaultMini;
-
-/**
- *
- * Plain Fields
- *
- * @property string $id
- * @property string $ref_id
- * @property array $name
- * @property array $description
- * 
- **/
-
-class MiniCategory extends DefaultMini
-{
-    protected $items = [
-        'ref_id' => [],
-        'name' => [
-            'is-ml' => true,
-        ],
-        'description' => [
-            'is-ml' => true,
-        ]
-    ];
-}
-```
-
-::: tip
-Use `ref_id` field to store the id from the father model.
-:::
-
-#### Mongo Relation Attribute
-
-Now that you have understand what are MiniModels you are ready to create your first relation on your model. First of all you have to create an array that will contains all the relations that you need:
-
-**Article**
-
-``` php 
-class Article extends MDModel
-{
-    {...}
-    
-    protected $mongoRelation = [
-        //
-    ];
-}
-```
-
-**Category**
-
-``` php 
-class Category extends MDModel
-{
-    {...}
-    
-    protected $mongoRelation = [
-        //
-    ];
-}
-```
-
-**PrimaryCategory**
-
-``` php 
-class PrimaryCategory extends MDModel
-{
-    {...}
-    
-    protected $mongoRelation = [
-        //
-    ];
-}
-```
+### Relationship
 
 Then you can define your relation:
 
@@ -1227,19 +1031,3 @@ If you’ve found a bug regarding security please mail <support@offlineagency.co
 Open source software is used in all projects we deliver. Laravel, Nginx, Ubuntu are just a few of the free pieces of software we use every single day. For this, we are very grateful. When we feel we have solved a problem in a way that can help other developers, we release our code as open source software on [GitHub](https://github.com/offline-agency).
 
 This package was made by [Giacomo Fabbian](https://github.com/Giacomo92). There are [many other contributors](https://github.com/offline-agency/laravel-mongo-auto-sync/graphs/contributors) who devoted time and effort to make this package better.
-
-## Demo
-
-### Commands
-
-#### GenerateModelDocumentation
-
-#### DropCollection
-
-#### CheckDbConsistency
-
-## FAQ
-
-::: warning
-Questions & Answers
-:::
