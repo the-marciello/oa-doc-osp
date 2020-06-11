@@ -6,3 +6,8 @@
 
 .vuepress/dist
 node_modules/
+.idea/.gitignore
+.idea/misc.xml
+.idea/modules.xml
+.idea/oa-doc-out.iml
+.idea/vcs.xml
