@@ -19,52 +19,51 @@ At low level all CRUD operations has been handled by [jenssegers/laravel-mongodb
   //assign data to $article       
   $article->save();
   /*
-  Article {
-      'title' => 'Game of Thrones',
-      'category' => Category {
-                'name' => 'TV Series'
-             }
-      }
+  Article::class {
+    'title' => 'Game of Thrones',
+    'category' => Category::class {
+        'name' => 'TV Series'
+     }
+  }
   */
   
   //Retrieve 'TV Series' category
   $category = Category::where('name', 'TV Series')->first();
-  $category->article;
-   /*
-    Category {
+  /*
+    Category::class {
         'name' => 'Game of Thrones',
-        'articles' => []
+        'articles' => null
     }
-    */
-    ```
+  */
+  ```
   The sub document article has not been updated with the new article. So you will need some extra code to write in order to see the new article it in the category page. The number of sync depends on the number of the relationships and on the number of the entry in every single EmbedsMany relationships.
   
-  ∑ of Total updates = ∑ (entry in all EmbedsMany relationships) + ∑ (embedsOne relationships)
+  Total updates = ∑ (entry in all EmbedsMany relationships) + ∑ (embedsOne relationships)
   
   As you can see the lines of extra code can rapidly increase, and you will write many redundant code.
  
   #### Example with our package
   ``` php
-    //create a new Article with title "Game of Thrones" with Category "TV Series"
-    $article->storeWithSync($request);
-    /*
-     Article {
-         'title' => 'Game of Thrones',
-         'category' => '
-           'name' => 'TV Series'
-         }
-     */
+  //create a new Article with title "Game of Thrones" with Category "TV Series"
+  $article->storeWithSync($request);
+  /*
+  Article::class {
+    'title' => 'Game of Thrones',
+    'category' => Category::class {
+        'name' => 'TV Series'
+    }
+  }
+   */
   //Retrieve 'TV Series' category
   $category = Category::where('name', 'TV Series')->first();   
-  $category->article;
-     /*
-      Category {
-          'name' => 'Game of Thrones',
-          'articles' => Article {
-                    'title' => 'Game of Thrones'
-                }
-          }
-      */
+ /*
+  Category::class {
+    'name' => 'Game of Thrones',
+    'articles' => Article::class {
+        'title' => 'Game of Thrones'
+    }
+  }
+  */
   ```
   The sub document article has been updated with the new article, with no need of extra code :tada:. You can see the new article it in the category page because the package syncs the information for you reading the Model Setup.
   
