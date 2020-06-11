@@ -12,12 +12,12 @@ module.exports = {
     locales:{
         '/': {
             lang: 'English',
-            title: 'OA-DOC',
+            title: 'Offline Agency Docs',
             description: ''
         },
         '/it/': {
             lang: 'Italian',
-            title: 'OA-DOC',
+            title: 'Offline Agency Docs',
             description: ''
         }
     },
