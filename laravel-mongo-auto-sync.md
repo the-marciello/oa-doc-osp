@@ -13,7 +13,7 @@ At low level all CRUD operations has been handled by [jenssegers/laravel-mongodb
 - Sync changes between collection with relationships after CRUD operations
     - EmbedsOne & EmbedsMany 
     
-  ### Example without our package
+  #### Example without our package
     ``` php
   //create a new Article with title "Game of Thrones" with Category "TV Series"
   //assign data to $article       
@@ -43,7 +43,7 @@ At low level all CRUD operations has been handled by [jenssegers/laravel-mongodb
   
   As you can see the lines of extra code can rapidly increase, and you will write many redundant code.
  
-  ### Example with our package
+  #### Example with our package
   ``` php
     //create a new Article with title "Game of Thrones" with Category "TV Series"
     $article->storeWithSync($request);
@@ -74,7 +74,7 @@ At low level all CRUD operations has been handled by [jenssegers/laravel-mongodb
 - Handle referenced sub document as Model in order to exploit Laravel ORM support during write operation (without sync feature)<Badge text="TO DO" type="error"/> 
 - Advance cast field support
 
-## Use cases:
+## Use cases
 - Blog: see demo [here](https://github.com/offline-agency/laravel-mongodb-blog)
 - Ecommerce
 - API System for mobile application o for generated static site
