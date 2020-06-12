@@ -153,6 +153,7 @@ Below is a list of all possible field types:
  [GeoJSON Objects](#geojson-objects) <Badge text="TO DO" type="error"/> <br>
  [Int](#int) <Badge text="TO DO" type="error"/> <br>
  [Multi language](#multi-language-is-ml)<br>
+ [Slug](#slug) <Badge text="TO DO" type="error"/> <br>
  [String](#string) <Badge text="TO DO" type="error"/> <br>
  
  **NB:**<br>
@@ -167,10 +168,10 @@ Validation or casting in to a boolean value.
 
 #### Date
 
-**String (is-md)**<br> 
+ - **String (is-md)**<br> 
 Validation or casting a date in a string format and save it in [UTC Mongo date time](https://www.php.net/manual/en/class.mongodb-bson-utcdatetime.php). 
 
-**Carbon (is-carbon-date)**<br>
+- **Carbon (is-carbon-date)**<br>
 Validation or casting a [Carbon](https://carbon.nesbot.com/) instance date field and save it in [UTC Mongo date time](https://www.php.net/manual/en/class.mongodb-bson-utcdatetime.php). 
 
 #### Default 
@@ -196,16 +197,21 @@ Save an array structure with where the key is the current language [^1] and the 
   Article::class {
     'title' => [
         'en_EN' => 'Today news',
-        'it_IT' => 'Notizie di oggi',
         'es_ES' => 'Noticias de hoy',
+        'it_IT' => 'Notizie di oggi',
         
-        {...}        
+        .        
+        .
+        .
 
         'zh_CN'=> '今天新闻'
      }
   }
   */
   ```
+
+#### Slug <Badge text="TO DO" type="error"/>
+Validation or casting in to a slugified string value.
 
 #### String <Badge text="TO DO" type="error"/>
 Validation or casting in to a string value.
@@ -215,7 +221,7 @@ This feature prevents unexpected field update.<br>
 Common use case: slug field of an article.
 
  **NB:**<br>
- The key is between brackets and the value is in boolean format.<br>
+ The key is between brackets, and the value is in the boolean format.<br>
  ex: for Editable the key is ```is-array```
  
 #### Default Value <Badge text="TO DO" type="error"/>
@@ -223,10 +229,6 @@ This feature allows the setting of a default value when null is passed.
 
 ### Relationship
 
-Then you can define your relation:
-
-**Article**
-
 ``` php 
 class Article extends MDModel
 {
@@ -235,274 +237,50 @@ class Article extends MDModel
     protected $mongoRelation = [
         'categories' => [
             'type' => 'EmbedsMany',
-            'mode' => 'classic',
             'model' => 'App\Models\MiniCategory',
             'modelTarget' => 'App\Models\Category',
             'methodOnTarget' => 'articlelist',
             'modelOnTarget' => 'App\Models\MiniArticle',
-        ],
-        'primaryCategory' => [
-            'type'   => 'EmbedsOne',
-            'mode'   => 'classic',
-            'model' => 'App\Models\MiniCategory',
-            'modelTarget' => 'App\Models\PrimaryCategory',
-            'methodOnTarget' => 'articles',
-            'modelOnTarget' => 'App\Models\MiniArticle'
         ]
     ];
 }
 ```
 
-**Category**
+This is the possible configurations:
 
-``` php 
-class Category extends MDModel
-{
-    {...}
-    
-    protected $mongoRelation = [
-        'articlelist' => [
-            'type' => 'EmbedsMany',
-            'mode' => 'classic',
-            'model' => 'App\Models\MiniArticle',
-            'modelTarget' => 'App\Models\Article',
-            'methodOnTarget' => 'categories',
-            'modelOnTarget' => 'App\Models\MiniCategory',
-        ]
-    ];
-}
-```
+- **key**: This is the relation name on the current collection
 
-**PrimaryCategory**
+- **type**: indicate the type of the relationship, and it can be [EmbedsOne](#embedsone) or [EmbedsMany](#embedsmany)
 
-``` php 
-class PrimaryCategory extends MDModel
-{
-    {...}
-    
-    protected $mongoRelation = [
-        'articles' => [
-            'type' => 'EmbedsMany',
-            'mode' => 'classic',
-            'model' => 'App\Models\MiniArticle',
-            'modelTarget' => 'App\Models\Article',
-            'methodOnTarget' => 'primaryCategory',
-            'modelOnTarget' => 'App\Models\MiniCategory',
-        ]
-    ];
-}
-```
+- **mode**: (optional) currently not used
 
-Now analyze what you are wrote up here:
+- **model**: is the MiniModel of current collection
 
-- **type**: indicate the type of the relation and it can be [EmbedsOne](#embedsone) or [EmbedsMany](#embedsmany)
-
-- **mode**: opzionale non utilizzato
-
-- **model**: is the MiniModel of the related collection
-
-- **modelTarget**: is the related collection
+- **modelTarget**: is the Model of the related collection
 
 - **methodOnTarget**: is the relation name on the model of the related collection
 
-- **modelOnTarget**: is the MiniModel of the current model
+- **modelOnTarget**: is the MiniModel of sub document of the target collection
 
-#### Target
-
-Targets are very important mainly for two reasons:
-
-  - You use all the powerful of Eloquent;
-  - You can access at the fields of the related collection like you access at the field of the collection
-
-But you can also choose to don't use it, in this case the code became:
+If you want to exploit all the benefits of Laravel ORM you have to define the relationships this way:
 
 ``` php
+<?php
+
 class Article extends MDModel
 {
     {...}
-    
-    protected $mongoRelation = [
-        'categories' => [
-            'type' => 'EmbedsMany',
-            'mode' => 'classic',
-            'model' => 'App\Models\MiniCategory',
-            'modelTarget' => 'App\Models\Category',
-            'methodOnTarget' => 'articlelist',
-            'modelOnTarget' => 'App\Models\MiniArticle',
-        ],
-        'primaryCategory' => [
-            'type' => 'EmbedsOne',
-            'mode' => 'classic',
-            'model' => 'App\Models\MiniCategory',
-            'has-target' => false
-        ]
-    ];
-}
-```
 
-In this way primary category will be saved in the article collection but article will not be saved on primary category. 
-
-### Results
-
-#### Article
-
-``` php
-<?php
-
-namespace App\Models;
-
-use OfflineAgency\MongoAutoSync\Http\Models\MDModel;
-
-/**
- *
- * Plain Fields
- *
- * @property string $id
- * @property array $title
- * @property string $slug
- * @property array $content
- * @property $planned_date
- *
- * Relationship
- *
- * @property MiniCategory
- * @property MiniCategory
- *
- **/
-
-class Article extends MDModel
-{
-    protected $collection = 'article';
-
-    protected $items = [
-        'title' => [
-            'is-ml' => true,
-        ],
-        'slug' => [],
-        'content' => [
-            'is-ml' => true,
-        ],
-        'planned_date' => [
-            'is-md' => true
-        ]
-    ];
-
-    protected $dates = [
-        'creation_date',
-        'publication_date'
-    ];
-
-    protected $mongoRelation = [
-        'categories' => [
-            'type' => 'EmbedsMany',
-            'mode' => 'classic',
-            'model' => 'App\Models\MiniCategory',
-            'modelTarget' => 'App\Models\Category',
-            'methodOnTarget' => 'articlelist',
-            'modelOnTarget' => 'App\Models\MiniArticle',
-        ],
-        'primaryCategory' => [
-            'type'   => 'EmbedsOne',
-            'mode'   => 'classic',
-            'model' => 'App\Models\MiniCategory',
-            'modelTarget' => 'App\Models\PrimaryCategory',
-            'methodOnTarget' => 'articles',
-            'modelOnTarget' => 'App\Models\MiniArticle'
-        ]
-    ];
-
-    public function primaryCategory()
+    public function category()
     {
-        return $this->embedsOne('App\Models\MiniPrimaryCategory'];
+        return $this->embedsOne('App\Models\MiniCategory'];
     }
 
-    public function categories()
-    {
-        return $this->embedsMany('App\Models\MiniCategory'];
-    }
 }
+
 ```
-
-#### Category
-
-``` php
-<?php
-
-namespace App\Models;
-
-use OfflineAgency\MongoAutoSync\Http\Models\MDModel;
-
-/**
- *
- * Plain Fields
- *
- * @property string $id
- * @property array $name
- * @property string $slug
- * @property array $description
- * @property string $img
- *
- * Relationship
- *
- * @property MiniArticle
- *
- **/
-
-class Category extends MDModel
-{
-    protected $collection = 'category';
-
-    protected $items = [
-        'name' => [
-            'is-ml' => true,
-        ],
-        'slug' => [],
-        'description' => [
-            'is-ml' => true,
-        ],
-        'img' => []
-    ];
-
-    protected $mongoRelation = [
-        'articlelist' => [
-            'type' => 'EmbedsMany',
-            'mode' => 'classic',
-            'model' => 'App\Models\MiniArticle',
-            'modelTarget' => 'App\Models\Article',
-            'methodOnTarget' => 'categories',
-            'modelOnTarget' => 'App\Models\MiniCategory',
-        ]
-    ];
-
-    public function articlelist()
-    {
-        return $this->embedsMany('App\Models\MiniArticle'];
-    }
-}
-```
-
-#### Primary Category
-
-``` php
-<\    ];
-
-    protected $mongoRelation = [
-        'articles' => [
-            'type' => 'EmbedsMany',
-            'mode' => 'classic',
-            'model' => 'App\Models\MiniArticle',
-            'modelTarget' => 'App\Models\Article',
-            'methodOnTarget' => 'primaryCategory',
-            'modelOnTarget' => 'App\Models\MiniCategory',
-        ],
-    ];
-
-    public function articles()
-    {
-        return $this->embedsMany('App\Models\MiniArticle'];
-    }
-}
-```
+So now when you dump ```$article->category``` you will get an instance of ```MiniCategory``` instead of an array.
+For more information about this feature you can check [here](https://github.com/jenssegers/laravel-mongodb#basic-usage-1)
 
 ### Utilities
 
@@ -594,44 +372,17 @@ return [
 
 It allows you to keep the current project structure.
 
-#### Check DB consistency
+#### Check DB consistency <Badge text="TO DO" type="error"/> 
 
-This command, which will be added probably in the next release [here](#checkdbconsistency), allow you to check if the relations will be saved in the right way. It make sure that the [MiniModel](#minimodel) will be added on the target and check if the items will be saved on the related collection.
+This command, which will be added probably in the next release (see [Roadmap](#roadmap) section), allow you to check if the relations will be saved in the right way. It makes sure the sub document exist in the current collection and on the related collection.
 
 ## Operations
 
 ### Store
 
-#### Description
-
-#### Advantages
-
-As we have already said this package allows you to store an object that automatically will be stored in all collections where it has a relation. Following the above examples when a new article is stored it will appear in the category collection while categories and primary category will be saved under article.
-
-#### Images 
-::: danger 
-TODO: add images of article and category
-:::
-
 #### Usage
 
 First of all you have to create a function `store()` where you receive a `$request` in input.
-
-``` php
-<?php
-
-namespace App\Controller;
-
-use App\Http\Controllers\Controller;
-
-class ArticleController extends Controller
-{
-    public function store($request)
-    {
-        //
-    }
-}
-```
 
 Now you have to declare a new article instance.
 
@@ -648,41 +399,20 @@ class ArticleController extends Controller
     public function store($request)
     {
         $article = new Article;
-    }
-}
-```
 
-#### Field
-
-In `$request` you receive all the fields from a form. If they have the same name of the model they will be directly stored.
-
-::: danger 
-TODO: add an image of an article form where the user can insert title, content, planned_date, publication_date and categories.
-:::
-
-But they may not be all the fields that you need. For this reason you can create an array where you declare others fields.
-
-``` php
-<?php
-
-namespace App\Controller;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Str;
-use MongoDB\BSON\UTCDateTime;
-use DateTime;
-
-class ArticleController extends Controller
-{
-    public function store($request)
-    {
-        $arr = [
-           'slug' => Str::slug($request->input('title')),
-           'creation_date' => new UTCDateTime(new DateTime('now'))
+        $additional_parameters = [
+           'slug' => Str::slug($request->input('title'))
         ];
+
+        $options = [];
+
+        $article->storeWithSync($request, $additional_parameters, $options);
     }
 }
 ```
+You can pass to storeWithSync() two parameters:
+- $request (optional) that is an instance of Request. If your request key is present on the $items array (see [Model Setup](#fields) section) the value will be stored to database with no extra code.
+- $additional_parameters is an (optional) key-value array. 
 
 #### Store With Relation
 
@@ -1056,7 +786,14 @@ add images
 GF
 :::
 
-## Roadmap
+## Roadmap :rocket:
+- Refactor target synchronization to Observer pattern, so all this operation can be run on background using [Laravel Queue System](https://laravel.com/docs/5.8/queues). This will also speed up all the operations in the collection that is primary involved in write operations.
+- Command Analyse Database: This command will analyse the database in order to find some relationship error. Ex: An article with a category associated that is not present on the Category's sub document.
+- Refactor **save()** method in order to handle CRUD operation on relationship also without sync
+- Support for [referenced relationships](https://docs.mongodb.com/manual/tutorial/model-referenced-one-to-many-relationships-between-documents/)
+- Better support for all field types
+- Add more tests 
+- Fix typo errors
 
 ## Questions & issues
 
