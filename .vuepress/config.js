@@ -62,6 +62,11 @@ module.exports = {
                 'ga': '' // UA-00000000-0
             }
         ],
-        ['@vuepress/last-updated']
+        ['@vuepress/last-updated'],
     ],
-    };
+
+    extendMarkdown: md => {
+        md.use(require('markdown-it-footnote'))
+    }
+
+};
