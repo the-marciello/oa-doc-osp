@@ -87,7 +87,7 @@ You can see the new article on the category page because the package synchronize
 ## Installation and Setup
 
 ### Prerequisites
-Make sure you have the MongoDB PHP driver installed. You can find installation instructions at [http://php.net/manual/en/mongodb.installation.php](http://php.net/manual/en/mongodb.installation.php).
+Make sure you have the MongoDB PHP driver installed. You can find installation instructions at [http://php.net/manual/en/mongodb.installation.php](http://php.net/manual/en/mongodb.installation.php)
 
 ### Laravel version Compatibility
 
@@ -135,28 +135,35 @@ class Article extends MDModel
 Add ```$items``` attribute on your model class and fill it with a key-value array. 
 The key indicates the name of the field and the value contain its configuration parameters. 
 
-**Below is a list of all possible configurations:**
+#### Field Types
 
+Below is a list of all possible configurations:
 
+ [Array](#array-is-array)<br>
+ [Date](#date)<br>
+ [Default]()<br>
+ [Double]()<br>
+ [Editable]()<br>
+ [Int]()<br>
+ [Multi language](#multi-language-is-ml)<br>
 
-#### is-ml (multi-lingual)
-
-It creates an array of key-value pairs where the the language code (like "it_IT") will be the key and the text will be the value.
-
-
-#### is-md
-
-It creates a mongo-date field.
-
-
-#### is-carbon-date
-
-It creates a [carbon](https://carbon.nesbot.com/) field with which is easier make operations.
-
-
-#### is-array
+ 
+#### Array (is-array)
 
 It creates an array field where you can save different information between an object and the others.
+
+#### Multi language (is-ml)
+
+It creates an array of key-value pairs where the language code (like "it_IT") will be the key and the text will be the value.
+
+#### Date
+
+**Utc Mongo Date (is-md)**<br>
+It creates a mongo-date field.
+
+**Carbon Date (is-carbon-date)**<br>
+It creates a [carbon](https://carbon.nesbot.com/) field with which is easier make operations.
+
 
 
 ### Results
