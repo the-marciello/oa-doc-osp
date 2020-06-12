@@ -40,15 +40,7 @@ To understand how the package works we see an example based on the following [Mo
 
 ## Model setup
 
-1. Your model has to extend our [MDModel](https://github.com/offline-agency/laravel-mongo-auto-sync/blob/master/src/Http/Models/MDModel.php) class in order to use our extended methods for CRUD operations.
-
-2. Add 
-
-
-
-### Items
-
-
+Your model has to extend our [MDModel](https://github.com/offline-agency/laravel-mongo-auto-sync/blob/master/src/Http/Models/MDModel.php) class in order to use our extended methods for CRUD operations.
 
 ``` php
 class Article extends MDModel
@@ -57,121 +49,34 @@ class Article extends MDModel
 }
 ```
 
-Now you can define the collection and all the fields that you need. Those must be declared as array but default when you create a new object they will be saved as string
+### Fields
 
-``` php
-class Article extends MDModel
-{
-        protected $collection = 'article';
-    
-        protected $items = [
-            'title' => [],
-            'slug' => [],
-            'content' => [],
-            'planned_date' => []
-        ];
-}
-```
+Add ```$items``` attribute on your model class and fill it with a key-value array. 
+The key indicates the name of the field and the value contain its configuration parameters. 
 
-If you need other field type you can use one of the option implemented in the package:
+**Below is a list of all possible configurations:**
+
+
 
 #### is-ml (multi-lingual)
 
 It creates an array of key-value pairs where the the language code (like "it_IT") will be the key and the text will be the value.
 
-``` php
-class Article extends MDModel
-{
-        protected $collection = 'article';
-    
-        protected $items = [
-            'title' => [
-                'is-ml' => true
-            ],
-            'slug' => [],
-            'content' => [
-                'is-ml' => true
-            ],
-            'planned_date' => []
-        ];
-}
-```
 
 #### is-md
 
 It creates a mongo-date field.
 
-``` php
-class Article extends MDModel
-{
-        protected $collection = 'article';
-    
-        protected $items = [
-            'title' => [
-                'is-ml' => true
-            ],
-            'slug' => [],
-            'content' => [
-                'is-ml' => true
-            ],
-            'planned_date' => [
-                'is-md' => true
-            ]
-        ];
-}
-```
 
 #### is-carbon-date
 
 It creates a [carbon](https://carbon.nesbot.com/) field with which is easier make operations.
 
-``` php
-class Article extends MDModel
-{
-        protected $collection = 'article';
-    
-        protected $items = [
-            'title' => [
-                'is-ml' => true
-            ],
-            'slug' => [],
-            'content' => [
-                'is-ml' => true
-            ],
-            'planned_date' => [
-                'is-carbon-date' => true
-            ]
-        ];
-}
-```
 
 #### is-array
 
 It creates an array field where you can save different information between an object and the others.
 
-``` php
-class Article extends MDModel
-{
-        protected $collection = 'article';
-    
-        protected $items = [
-            'title' => [
-                'is-ml' => true
-            ],
-            'slug' => [],
-            'content' => [
-                'is-array' => true
-            ],
-            'planned_date' => [
-                'is-md' => true
-            ]
-        ];
-        
-        protected $mongoRelation = [
-            //
-        ];
-}
-```
 
 ### Results
 
