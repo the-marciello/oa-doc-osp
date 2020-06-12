@@ -1,17 +1,88 @@
 ---
 meta:
   - name: description
-    content: A Laravel package that allow to sync changes between collections on MongoDB projects.
+    content: This package provides a better support for MongoDB relationship in Laravel Projects.
 gitName: laravel-mongo-auto-sync
 ---
 
-# laravel-mongo-auto-sync
-A package that allow to sync changes between collections on [MongoDB](https://www.mongodb.com) projects.
+# Laravel MongoDB Relationships
+This package provides a better support for [MongoDB](https://www.mongodb.com) relationship in [Laravel](https://laravel.com/) Projects.
+At low level all CRUD operations has been handled by [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb)
+
+## Features
+- Sync changes between collection with relationships after CRUD operations
+    - EmbedsOne & EmbedsMany 
+    
+  #### Example without our package
+    ``` php
+  //create a new Article with title "Game of Thrones" with Category "TV Series"
+  //assign data to $article       
+  $article->save();
+  /*
+  Article::class {
+    'title' => 'Game of Thrones',
+    'category' => Category::class {
+        'name' => 'TV Series'
+     }
+  }
+  */
+  
+  //Retrieve 'TV Series' category
+  $category = Category::where('name', 'TV Series')->first();
+  /*
+    Category::class {
+        'name' => 'Game of Thrones',
+        'articles' => null
+    }
+  */
+  ```
+  The sub document article has not been updated with the new article. So you will need some extra code to write in order to see the new article it in the category page. The number of sync depends on the number of the relationships and on the number of the entry in every single EmbedsMany relationships.
+  
+  Total updates = ∑ (entry in all EmbedsMany relationships) + ∑ (embedsOne relationships)
+  
+  As you can see the lines of extra code can rapidly increase, and you will write many redundant code.
+ 
+  #### Example with our package
+  ``` php
+  //create a new Article with title "Game of Thrones" with Category "TV Series"
+  $article->storeWithSync($request);
+  /*
+  Article::class {
+    'title' => 'Game of Thrones',
+    'category' => Category::class {
+        'name' => 'TV Series'
+    }
+  }
+   */
+  //Retrieve 'TV Series' category
+  $category = Category::where('name', 'TV Series')->first();   
+ /*
+  Category::class {
+    'name' => 'Game of Thrones',
+    'articles' => Article::class {
+        'title' => 'Game of Thrones'
+    }
+  }
+  */
+  ```
+  The sub document article has been updated with the new article, with no need of extra code :tada:. You can see the new article it in the category page because the package syncs the information for you reading the Model Setup.
+  
+  These example can be applied for all write operations on the database.
+  - Referenced sub documents <Badge text="TO DO" type="error"/> 
+- Handle sub document as Model in order to exploit Laravel ORM support during write operation (without sync feature)<Badge text="TO BE TESTED" type="warning"/> 
+- Handle referenced sub document as Model in order to exploit Laravel ORM support during write operation (without sync feature)<Badge text="TO DO" type="error"/> 
+- Advance cast field support
+
+## Use cases
+- Blog: see demo [here](https://github.com/offline-agency/laravel-mongodb-blog)
+- Ecommerce
+- API System for mobile application o for generated static site
+- Any projects that require fast read operations and (slow) write operations that can be run on background
 
 ## Installation and Setup
 
+### Prerequisites
 Make sure you have the MongoDB PHP driver installed. You can find installation instructions at [http://php.net/manual/en/mongodb.installation.php](http://php.net/manual/en/mongodb.installation.php).
-This package is build on top of [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb) v3.6.x 
 
 ### Laravel version Compatibility
 
@@ -19,7 +90,7 @@ This package is build on top of [jenssegers/laravel-mongodb](https://github.com/
 | ----------- | ----------- |
 | 5.8.x       | 1.x         |
 | 6.x         | 1.x         |
-| 7.x         | <Badge text="to do" type="warning"/>         |
+| 7.x         | <Badge text="TO BE TESTED" type="warning"/>         |
 
 ### Basic Installation
 
@@ -31,7 +102,12 @@ composer require offlineagency/laravel-mongo-auto-sync
 
 ### Before starting 
 
-To understand how the package works we see an example based on the following [MongoDB relationships](https://docs.mongodb.com/manual/applications/data-models-relationships/):
+To understand how the package works we see an example based on the following Model:
+- [Article](https://github.com/offline-agency/laravel-mongodb-blog/blob/master/app/Models/Article.php)
+- [Category](https://github.com/offline-agency/laravel-mongodb-blog/blob/master/app/Models/Category.php)
+- PrimaryCategory
+
+and the following [MongoDB relationships](https://docs.mongodb.com/manual/applications/data-models-relationships/):
 
 - Article [EmbedsMany](https://docs.mongodb.com/manual/tutorial/model-embedded-one-to-many-relationships-between-documents/) Category
 - Category [EmbedsMany](https://docs.mongodb.com/manual/tutorial/model-embedded-one-to-many-relationships-between-documents/) Article
