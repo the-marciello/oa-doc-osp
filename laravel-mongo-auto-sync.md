@@ -84,7 +84,7 @@ You can see the new article on the category page because the package synchronize
 - API System for mobile application o for generated static site
 - Any projects that require fast read operations and (slow) write operations that can be run on background
 
-## Installation and Setup
+## Installation
 
 ### Prerequisites
 Make sure you have the MongoDB PHP driver installed. You can find installation instructions at [http://php.net/manual/en/mongodb.installation.php](http://php.net/manual/en/mongodb.installation.php)
@@ -97,7 +97,7 @@ Make sure you have the MongoDB PHP driver installed. You can find installation i
 | 6.x         | 1.x         |
 | 7.x         | <Badge text="TO BE TEST" type="warning"/>         |
 
-### Installation
+### Composer Installation
 
 Install the package via Composer:
 
@@ -316,8 +316,8 @@ The generated doc will be like this:
  **/
 ```
 
-The command checks if the model exist in your project and if it doesn’t it print an error message like this:
-`Error: collection_name Model not found`
+The command checks if the model exist in your project and if it doesn’t, it will print an error message like this:
+`Error: <collection_name> Model not found`
 
 You can also change your model path in this file `config\laravel-mongo-auto-sync.php`: 
 
@@ -411,8 +411,10 @@ class ArticleController extends Controller
 }
 ```
 You can pass to storeWithSync() two parameters:
-- $request (optional) that is an instance of Request. If your request key is present on the $items array (see [Model Setup](#fields) section) the value will be stored to database with no extra code.
-- $additional_parameters is an (optional) key-value array. 
+- **$request** that is an instance of Request. If your request key is present on the $items array (see [Model Setup](#fields) section) the value will be stored to database with no extra code.
+- **$additional_parameters** is an (optional) key-value array. You can pass here other fields, that can be stored to database. 
+- **$options** this is an (optional) key-value array. You can pass here advance options. This is the possibile values:
+    - 'partial-request' boolean
 
 #### Store With Relation
 
@@ -420,47 +422,12 @@ Now you have to add the relationships.
 
 You need a json that contains: 
 
-- EmbedsOne: an array with an object that has all the fields of the [MiniModel](#minimodel);
-- EmbedsMany: an array with an object for each, in this case, category that contains all the fields of the [MiniModel](#minimodel).
+- **EmbedsOne:** an array with an object that has all the fields of the [MiniModel](#minimodel);
+- **EmbedsMany:** an array with an object for each, in this case, category that contains all the fields of the [MiniModel](#minimodel).
 
-Json was chosen to using in on frontend. 
+We choose Json format to ease integration with frontend. 
 
-For example ypu can create new functions called `getCategories` and `getPrimaryCategory`:
-
-``` php
-<?php
-
-namespace App\Controller;
-
-use ...
-
-class ArticleController extends Controller
-{
-    public function store($request)
-    {
-        $article = new Article;
-                
-                $arr = [
-                    'slug' => Str::slug($request->input('title')),
-                    'creation_date' => new UTCDateTime(new DateTime('now')),
-                    'categories' => $this->getCategories($request->categories_id),
-                    'primaryCategory' => $this->getPrimaryCategory($request->categories_id)
-                ];
-    }
-
-    public function getCategories($categories_id)
-        {
-            //
-        }
-    
-        public function getPrimaryCategory($categories_id)
-        {
-            //
-        }
-}
-```
-
-And now you can define your related objects:
+For example, you can create new functions called `getCategories` and `getPrimaryCategory` as following:
 
 ``` php
 <?php
@@ -487,6 +454,7 @@ class ArticleController extends Controller
             'categories' => $this->getCategories($request->categories_id),
             'primaryCategory' => $this->getPrimaryCategories($request->categories_id)
         ];
+        $article->storeWithSync($request, $arr);
     }
 
     public function getCategories($categories_id)
@@ -529,91 +497,6 @@ class ArticleController extends Controller
     }
 }
 ```
-
-Now you can save your new object using storeWithSync where you have to pass $request as first parameters and $arr as second.
-
-``` php
-<?php
-
-namespace App\Controller;
-
-use ...
-
-class ArticleController extends Controller
-{
-    public function store($request)
-    {
-        $article = new Article;
-
-        $arr = [
-            'slug' => Str::slug($request->input('title')),
-            'creation_date' => new UTCDateTime(new DateTime('now')),
-            'categories' => $this->getCategories($request->categories_id),
-            'primaryCategory' => $this->getPrimaryCategories($request->categories_id)
-        ];
-        
-        $article->storeWithSync($request, $arr);
-    }
-
-    public function getCategories($categories_id)
-    {
-        {...}
-    }
-
-    public function getPrimaryCategories($categories_id)
-    {
-        {...}
-    }
-}
-```
-
-#### Store Partial Request
-
-You can also decide to don't save the relation. In this case you have to add `$options`:
-
-``` php
-<?php
-
-namespace App\Controller;
-
-use ...
-
-class ArticleController extends Controller
-{
-    public function store($request)
-    {
-        $article = new Article;
-
-        $arr = [
-            'slug' => Str::slug($request->input('title')),
-            'creation_date' => new UTCDateTime(new DateTime('now'))
-        ];
-
-        $options = [
-            'request_type' => 'partial'            
-        ]
-        
-        $article->storeWithSync($request, $arr, $options);
-    }
-}
-```
-
-#### Result
-
-#### With Relation
-The output with [Relation](#store-with-relation) will be like this:
-
-::: danger
-Add images
-:::
-
-#### With Partial Request
-
-While the output using [Partial Request](#store-partial-request) will be like this:
-
-::: danger
-Add images
-::: 
 
 
 ### Update
