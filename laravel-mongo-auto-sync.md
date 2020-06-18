@@ -148,7 +148,7 @@ Below is a list of all possible field types:
  [Array](#array-is-array)<br>
  [Boolean](#boolean) <Badge text="TO DO" type="error"/><br>
  [Date](#date)<br>
- [Default](#default)
+ [Default](#default)<br>
  [Double](#double) <Badge text="TO DO" type="error"/> <br>
  [GeoJSON Objects](#geojson-objects) <Badge text="TO DO" type="error"/> <br>
  [Int](#int) <Badge text="TO DO" type="error"/> <br>
