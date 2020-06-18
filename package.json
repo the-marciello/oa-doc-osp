@@ -15,7 +15,11 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/matteogiacomo/oa-doc-out#readme",
   "dependencies": {
-    "vuepress": "^1.1.0",
-    "vuepress-plugin-clean-urls": "^1.0.3"
+    "@vuepress/plugin-google-analytics": "^1.5.1",
+    "markdown-it-footnote": "^3.0.2",
+    "vue-i18n": "^8.18.2",
+    "vuepress": "^1.5.1",
+    "vuepress-plugin-clean-urls": "^1.0.3",
+    "vuepress-plugin-container": "^2.1.4"
   }
 }

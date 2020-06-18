@@ -9,6 +9,13 @@ module.exports = {
         sidebar: 'auto',
         footer: 'auto'
         },
+    locales:{
+        '/': {
+            lang: 'English',
+            title: 'Offline Agency Docs',
+            description: ''
+        }
+    },
     plugins: [
         [
             'vuepress-plugin-clean-urls',
@@ -18,5 +25,43 @@ module.exports = {
                 notFoundPath: '/404.html',
             },
         ],
+        [
+            'vuepress-plugin-container',
+            {
+                type: 'right',
+                defaultTitle: '',
+            },
+        ],
+        [
+            'vuepress-plugin-container',
+            {
+                type: 'theorem',
+                before: info => `<div class="theorem"><p class="title">${info}</p>`,
+                after: '</div>',
+            },
+        ],
+        // this is how VuePress Default Theme use this plugin
+        [
+            'vuepress-plugin-container',
+            {
+                type: 'tip',
+                defaultTitle: {
+                    '/': 'TIP',
+                    '/zh/': '提示',
+                },
+            },
+        ],
+        [
+            '@vuepress/google-analytics',
+            {
+                'ga': 'UA-107667272-18'
+            }
+        ],
+        ['@vuepress/last-updated'],
     ],
-    };
+
+    extendMarkdown: md => {
+        md.use(require('markdown-it-footnote'))
+    }
+
+};
