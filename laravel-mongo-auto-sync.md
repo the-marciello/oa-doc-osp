@@ -1,12 +1,12 @@
 ---
 meta:
   - name: description
-    content: This package provides a better support for MongoDB relationship in Laravel Projects.
+    content: This package provides a better support for MongoDB relationships in Laravel Projects.
 gitName: laravel-mongo-auto-sync
 ---
 
 # Laravel MongoDB Relationships
-This package provides a better support for [MongoDB](https://www.mongodb.com) relationship in [Laravel](https://laravel.com/) Projects.
+This package provides a better support for [MongoDB](https://www.mongodb.com) relationships in [Laravel](https://laravel.com/) Projects.
 At low level all CRUD operations has been handled by [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb)
 
 ## Features
@@ -416,7 +416,7 @@ You can pass to storeWithSync() two parameters:
 - **$options** this is an (optional) key-value array. You can pass here advance options. This is the possibile values:
     - 'partial-request' boolean
 
-#### Store With Relation
+#### Store Relationships
 
 Now you have to add the relationships. 
 
@@ -501,66 +501,14 @@ class ArticleController extends Controller
 
 ### Update
 
-#### Description
-
-#### Advantages
-
-Update With Sync allows you to edit an object in its collection and in all collection that it's in a relationships with in a simple and fast way. In fact, following the above examples, when an article is updated the modification will be stored on the items of the correlated collection. Vice-versa when a categories will be updated all the articles that have this categories will be updated. This allows you to save time and avoid mistakes.
-
-#### Images
-
-::: danger
-Add images
-:::
-
 #### Usage 
 
 #### Field
 
 First of all you have to create an `update()` function where you receive `$request` and `$id` in input.
+After that you can search the article passing the `$id` as parameter on `find()` method.
 
-``` php
-<?php
-
-namespace App\Controllers;
-
-use App\Http\Controllers\Controller;
-
-class ArticleController extends Controller
-{
-    public function update($id, $request)
-    {
-        //
-    }
-}
-```
-
-After that you can search the article with the `$id`, for example:
-
-``` php
-<?php
-
-namespace App\Controllers;
-
-use App\Http\Controllers\Controller;
-use App\Models\Article;
-
-class ArticleController extends Controller
-{
-    public function update($id, $request)
-    {
-        $article = Article::find($id);
-    }
-}
-```
-
-`$request` contains all the fields that you receive from the form and, as store, if they have the same name of the model they will be saved automatically.
-
-::: danger
-add images of the form
-:::
-
-But if you want edit a value that `$request` doesn’t contains, as for the store, you can create an array which contains this fields:
+If you want to edit an extra field you can create an array which contains this fields:
 
 ``` php
 <?php
@@ -577,19 +525,92 @@ class ArticleController extends Controller
         $article = Article::find($id);
         
         $arr = [
-            'slug' => Str::slug($request->input('title')) . '-updated'
+            'slug' => Str::slug($request->input('title'))
         ];
     }
 }
 ```
 
-#### Update With Relation
+#### Update a Relationships
 
-If you change a category or you delete one, you can simply save this modification following the rules explained in the [store](#store-with-relation) method.
-
+This is the supported relationships type: 
+ - **EmbedsOne:** an array with an object that has all the fields of the [MiniModel](#minimodel);
+ - **EmbedsMany:** an array with an object for each, in this case, category that contains all the fields of the [MiniModel](#minimodel).
+ 
+ We choose Json format to ease integration with frontend. 
+ 
+ For example, you can create new functions called `getCategories` and `getPrimaryCategory` as following:
+ 
+ ``` php
+ <?php
+ 
+ namespace App\Controller;
+ 
+ use App\Models\Article;
+ use App\Models\Category;
+ use Illuminate\Support\Str;
+ use MongoDB\BSON\UTCDateTime;
+ use App\Http\Controllers\Controller;
+ use stdClass;
+ 
+ class ArticleController extends Controller
+ {
+     public function update($request)
+     {
+         $article = Article::find($id);
+ 
+         $arr = [
+             'slug' => Str::slug($request->input('title')),
+             'categories' => $this->getCategories($request->categories_id),
+             'primaryCategory' => $this->getPrimaryCategories($request->categories_id)
+         ];
+         $article->updateWithSync($request, $arr);
+     }
+ 
+     public function getCategories($categories_id)
+     {
+         $arr = [];
+         $i = 0;
+ 
+         if ($categories_id != null) {
+             foreach ($categories_id as $category_id) {
+                 $category = Category::find($category_id);
+ 
+                 $newCategory = new stdClass();
+                 $newCategory->ref_id = $category->id;
+                 $newCategory->name = $category->name[cl()];
+                 $newCategory->description = $category->description[cl()];
+ 
+                 $arr[$i] = $newCategory;
+                 $i++;
+             }
+             return json_encode($arr);
+         } else {
+             return null;
+         }
+     }
+ 
+     public function getPrimaryCategories($categories_id)
+     {
+         if ($categories_id != null && count($categories_id) > 0) {
+             $category = Category::find($categories_id[0]);
+ 
+             $newCategory = new stdClass();
+             $newCategory->ref_id = $category->id;
+             $newCategory->name = $category->name[cl()];
+             $newCategory->description = $category->description[cl()];
+ 
+             return json_encode($newCategory);
+         }else {
+             return null;
+         }
+     }
+ }
+ ```
 #### Update With Partial Request
 
-If you don’t edit any relation you can use partial request to ensure that the fields will be deleted.
+If you need to edit only a partition of items and relationships you can pass `'request_type' => 'partial'` on the `$options` to the `updateWithsSync()` method. 
+This configuration will disable all exceptions triggered by a missing field, and it will skip the field/relationships processing. 
 
 ``` php
 <?php
@@ -645,38 +666,46 @@ class ArticleController extends Controller
 }
 ```
 
-#### Result
-
-#### With Relation
-
-If you edit an object and its relation your result will look like this:
-
-::: danger
-add images
-:::
-
-#### With Partial Request
-
-If you edit only simple fields your result will look like this:
-
-::: danger
-add images
-:::
-
 ### Destroy
 
-::: danger
-GF
-:::
+#### Usage
+
+First of all you have to create an `destroy()` function where you receive `$id` in input.
+After that you can search the article passing the `$id` as parameter on `find()` method.
+With the `destroyWithSync()` method you will remove the current instance from database and it will also search for any sub documents in other collection. 
+ 
+ If you are familiar with Mysql you can find this feature similar to [ON DELETE CASCADE](https://dev.mysql.com/doc/refman/8.0/en/create-table-foreign-keys.html).
+``` php
+<?php
+
+namespace App\Controller;
+
+use App\Http\Controllers\Controller;
+use App\Models\Aticle;
+
+class ArticleController extends Controller
+{
+    public function destroy($id)
+    {
+        $article = new Article;
+        $article = $article->find($id);
+        $article->destroyWithSync();
+    }
+}
+```
+
+ 
 
 ## Roadmap :rocket:
 - Refactor target synchronization to Observer pattern, so all this operation can be run on background using [Laravel Queue System](https://laravel.com/docs/5.8/queues). This will also speed up all the operations in the collection that is primary involved in write operations.
-- Command Analyse Database: This command will analyse the database in order to find some relationship error. Ex: An article with a category associated that is not present on the Category's sub document.
-- Refactor **save()** method in order to handle CRUD operation on relationship also without sync
-- Support for [referenced relationships](https://docs.mongodb.com/manual/tutorial/model-referenced-one-to-many-relationships-between-documents/)
-- Better support for all field types
-- Add more tests 
-- Fix typo errors
+- Command Analyse Database: This command will analyse the database in order to find some relationship error. 
+Ex: An article with a category associated that is not present on the Category's sub document.
+- Refactor **save()** method in order to handle CRUD operation on relationship also without sync.
+- Support for [referenced relationships](https://docs.mongodb.com/manual/tutorial/model-referenced-one-to-many-relationships-between-documents/).
+- Better support for all field types.
+- DestroyWithSync() without delete sub documents on other collections.
+- Add more tests.
+- Fix typo errors.
 
 ## Questions & issues
 
