@@ -14,11 +14,6 @@ module.exports = {
             lang: 'English',
             title: 'Offline Agency Docs',
             description: ''
-        },
-        '/it/': {
-            lang: 'Italian',
-            title: 'Offline Agency Docs',
-            description: ''
         }
     },
     plugins: [
