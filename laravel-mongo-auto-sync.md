@@ -706,6 +706,7 @@ Ex: An article with a category associated that is not present on the Category's 
 - DestroyWithSync() without delete sub documents on other collections.
 - Add more tests.
 - Nested relationships.
+- Benchmark MongoDB vs Mysql (write and read operation).
 - Fix typo errors.
 
 ## Questions & issues
