@@ -705,6 +705,7 @@ Ex: An article with a category associated that is not present on the Category's 
 - Better support for all field types.
 - DestroyWithSync() without delete sub documents on other collections.
 - Add more tests.
+- Nested relationships.
 - Fix typo errors.
 
 ## Questions & issues
