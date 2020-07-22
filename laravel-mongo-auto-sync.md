@@ -95,7 +95,7 @@ Make sure you have the MongoDB PHP driver installed. You can find installation i
 | ----------- | ----------- |
 | 5.8.x       | 1.x         |
 | 6.x         | 1.x         |
-| 7.x         | <Badge text="TO BE TEST" type="warning"/>         |
+| 7.x         | <Badge text="TO BE TEST" type="warning"/> 2.0-alpha.1 (Pre-release)         |
 
 ### Composer Installation
 
