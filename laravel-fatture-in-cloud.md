@@ -92,6 +92,208 @@ Add this key in your `.env` file.
  
 Then replace `API UID` and `API KEY` with the values you find in the API section of your [Fatture in Cloud](https://secure.fattureincloud.it/api) account (see image below).
 
+## Test Environment
+
+... (You can create an account on FIC[^1] to test tha APIs)
+
+Follow this simple steps to create it:
+1. ... (Go to fic website)
+2. ... (Create an account and a test environment)
+3. ... (Copy key in your env)
+
+## Basic Usage
+
+**Laravel Fatture In Cloud** provides a simple method to integrate FIC[^1] API with your laravel projects.
+
+### Select or create
+
+... (In a lot of cases you can choose to select or create an object. For example if you are creating a new invoice yu can choose if create a new client or select him from a list of existing client)
+ 
+``` php
+{{...}}
+```
+
+## Endpoint
+
+### Account
+
+... (Include this method:)
+- **getInfo**: ...
+
+#### Examples
+
+``` php
+{{...}}
+```
+
+### Anagrafica
+
+Anagrafica allows you to use all the API about clients (clienti). It includes some methods:
+
+- **lista**: return  a list of all clients;
+- **nuovo**: it allows to create a new client
+- **importa**: it allows to import client from different sources  
+- **modifica**: it allows to edit a specific client  
+- **elimina**: it allows to delete a specific client
+
+#### Examples
+
+``` php
+$data = array(
+    {...}            
+);
+
+$client = new Anagrafica;
+$client_list = $client->lista($data);
+```
+
+### Clienti
+
+... 
+
+#### Examples
+
+``` php
+{{...}}
+```
+
+### DDT
+
+... 
+
+#### Examples
+
+``` php
+{{...}}
+```
+
+### Documenti
+
+... (Include some methods:)
+- **lista**: ...
+- **dettagli**: ...
+- **nuovo**: ...
+- **modifica**: ...
+- **elimina**: ...
+- **info**: ...
+
+#### Examples
+
+``` php
+{{...}}
+```
+
+### Fatture
+
+... (Include this method:)
+- **pdf**: ...
+
+#### Examples
+
+``` php
+{{...}}
+```
+
+### Fornitori
+
+... 
+
+#### Examples
+
+``` php
+{{...}}
+```
+
+### NDC
+
+... 
+
+#### Examples
+
+``` php
+{{...}}
+```
+
+### Ordini
+
+... 
+
+#### Examples
+
+``` php
+{{...}}
+```
+
+### Preventivi
+
+... 
+
+#### Examples
+
+``` php
+{{...}}
+```
+
+### Proforma
+
+... 
+
+#### Examples
+
+``` php
+{{...}}
+```
+
+### Rapporti
+
+... 
+
+#### Examples
+
+``` php
+{{...}}
+```
+
+### Ricevute
+
+... 
+
+#### Examples
+
+``` php
+{{...}}
+```
+
+## Use Cases / Sync
+
+... (With our package you can sync FIC[^1] with your project. Let's look two methods with you can use this features.)
+
+### With event and listener (for store and update)
+
+... (Create event and listener that can be called in different method to save or update data. For example to save new clients)
+
+``` php
+{{...}}
+```
+
+### With job (for list)
+
+... (Create a scheduled job that, for example, every day update the list of available products)
+
+``` php
+{{...}}
+```
+
+## Roadmap :rocket:
+- **[Demo](#demo)**: ... (New repo where show examples and functionality)
+- **Test**: ... (For all endpoints)
+- **Validation**: ... (On input)
+- **Compatibility**: ... (add Laravel 8)
+
+## Demo
+
+In coming
+
 ![Fatture in Cloud API section](./assets/images/fatture-in-cloud-api-section.png "Fatture in Cloud API section")
 
 ## Questions & issues
@@ -106,3 +308,6 @@ If you’ve found a bug regarding security please mail <support@offlineagency.co
 Open source software is used in all projects we deliver. Laravel, Nginx, Ubuntu are just a few of the free pieces of software we use every single day. For this, we are very grateful. When we feel we have solved a problem in a way that can help other developers, we release our code as open source software on [GitHub](https://github.com/offline-agency).
 
 This package was made by [Giacomo Fabbian](https://github.com/Giacomo92). There are [many other contributors](https://github.com/offline-agency/laravel-fatture-in-cloud/graphs/contributors) who devoted time and effort to make this package better.
+
+
+[^1]: **FIC (Fatture in Cloud)**: it's a software that allow you to handle invoices from pc, smartphone or tablet.
