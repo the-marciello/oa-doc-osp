@@ -717,8 +717,8 @@ If you’ve found a bug regarding security please mail <support@offlineagency.co
 
 ## About Us
 
-[Offline Agency](https://offlineagency.it) is a webdesign agency based in Padua, Italy.
+[[Offline Agency](https://offlineagency.it) is an agency based in Padua, Italy.
 
-Open source software is used in all projects we deliver. Laravel, Nginx, Ubuntu are just a few of the free pieces of software we use every single day. For this, we are very grateful. When we feel we have solved a problem in a way that can help other developers, we release our code as open source software on [GitHub](https://github.com/offline-agency).
+Open source software is used in all projects we deliver. This is just a few of the free pieces of software we use every single day. For this, we are very grateful. When we feel we have solved a problem in a way that can help other developers, we release our code as open source software on [GitHub](https://github.com/offline-agency).
 
 This package was made by [Giacomo Fabbian](https://github.com/Giacomo92). There are [many other contributors](https://github.com/offline-agency/laravel-mongo-auto-sync/graphs/contributors) who devoted time and effort to make this package better.
