@@ -18,7 +18,7 @@ You can install this package via composer using:
 ``` bash 
 composer require offline-agency/laravel-fatture-in-cloud
 ```
-    
+
 The package will automatically register its service provider.
 
 To publish the config file to `config/backup.php` run:
@@ -27,274 +27,118 @@ To publish the config file to `config/backup.php` run:
 php artisan vendor:publish --provider="OfflineAgency\FattureInCloud\FattureInCloudServiceProvider" --tag="config"    
 ```
 
-### First configuration
-
-This is the default contents of the configuration:
-
-``` php
-return [
-    'api_uid' => env('FATTURE_CLOUD_API_UID'),
-    'api_key' => env('FATTURE_CLOUD_API_KEY'),
-    "endpoint" => "https://api.fattureincloud.it/v1/",
-    "errors" => [
-        "0" => [
-            "code" => 400,
-            "message" => "Errore generico."
-        ],
-        "1000" => [
-            "code" => 401,
-            "message" => "Autenticazione fallita. I parametri di utlizzo 'api_uid' e 'api_key' non sono validi."
-        ],
-        "1001" => [
-            "code" => 400,
-            "message" => "Uno dei parametri è mancante o non valido."
-        ],
-        "1004" => [
-            "code" => 404,
-            "message" => "L'azienda non esiste o è stata disabilitata."
-        ],
-        "1100" => [
-            "code" => 400,
-            "message" => "Il contenuto della richiesta non è corretto (probabilmente il json non è formattato correttamente)."
-        ],
-        "2000" => [
-            "code" => 401,
-            "message" => "La licenza è scaduta."
-        ],
-        "2002" => [
-            "code" => 420,
-            "message" => "Uno dei limiti di richieste (al minuto, orario o annuale) è stato superato."
-        ],
-        "2004" => [
-            "code" => 403,
-            "message" => "L'utilizzo delle API è stato bloccato per questo account."
-        ],
-        "2005" => [
-            "code" => 403,
-            "message" => "La licenza non consente l'utilizzo di questa funzione."
-        ],
-        "2006" => [
-            "code" => 403,
-            "message" => "L'accesso ai dati richiesti è ristretto."
-        ],
-        "4001" => [
-            "code" => 420,
-            "message" => "Non è possibile completare la richiesta perché è stato raggiunto il limite massimo di anagrafiche."
-        ]
-    ]
-];
-``` 
-
-Add this key in your `.env` file.
-        
-    FATTURE_CLOUD_API_UID = <your_api_uid>;
-    FATTURE_CLOUD_API_KEY = <your_api_key>;
- 
-Then replace `API UID` and `API KEY` with the values you find in the API section of your [Fatture in Cloud](https://secure.fattureincloud.it/api) account (see image below).
-
 ## Test Environment
 
-... (You can create an account on FIC[^1] to test tha APIs)
+- Go to [Fatture in Cloud](https://www.fattureincloud.it) website.
+- Create an account and a test environment. The new account has 15 trial days.
+- Go to section and get **API UID** and **API KEY**
 
-Follow this simple steps to create it:
-1. ... (Go to fic website)
-2. ... (Create an account and a test environment)
-3. ... (Copy key in your env)
+![Fatture in Cloud API section](./assets/images/fatture-in-cloud-api-section.png "Fatture in Cloud API section")
 
 ## Basic Usage
-
-**Laravel Fatture In Cloud** provides a simple method to integrate FIC[^1] API with your laravel projects.
-
-### Select or create
-
-... (In a lot of cases you can choose to select or create an object. For example if you are creating a new invoice yu can choose if create a new client or select him from a list of existing client)
- 
-``` php
-{{...}}
-```
-
-## Endpoint
+Create a new invoice on FC
+## Entities
 
 ### Account
 
-... (Include this method:)
-- **getInfo**: ...
-
-#### Examples
-
 ``` php
-{{...}}
+$account = new Account;
+$account->getInfo(['campi'=> ['key']])
 ```
 
-### Anagrafica
+#### Available Methods
+- **getGenericInfo()**: it checks api key and return info about api rate limit
+- **getInfo()**: it returns info about (just pass the correct key instead of key see previous example ):
+    - Business name - *nome*
+    - Licence expiration : *durata_licenza*
+    - Licence type: *tipo_licenza*
+    - Currency list: *lista_valute*
+    - Vat list: *lista_iva*
+    - Country list: *lista_paesi*
+    - Template list: *lista_template*
+    - List of payment method for the sales: *lista_conti*
+    - List of payment method for the purchase: *lista_metodi_pagamento*
+    
 
-Anagrafica allows you to use all the API about clients (clienti). It includes some methods:
-
-- **lista**: return  a list of all clients;
-- **nuovo**: it allows to create a new client
-- **importa**: it allows to import client from different sources  
-- **modifica**: it allows to edit a specific client  
-- **elimina**: it allows to delete a specific client
-
-#### Examples
-
-``` php
-$data = array(
-    {...}            
-);
-
-$client = new Anagrafica;
-$client_list = $client->lista($data);
-```
-
-### Clienti
-
-... 
-
-#### Examples
+### Registry
 
 ``` php
-{{...}}
+//Aliases
+$customer = new Clienti;
+$supplier = new Fornitori;
 ```
 
-### DDT
+### Available Methods
+- **lista()**: return  a list of all customers/suppliers;
+- **nuovo()**: it allows to create a new customer/supplier
+- **importa()**: it allows to create a customer/supplier in batch
+- **modifica()**: it allows to edit a specific customer/supplier  
+- **elimina()**: it allows to delete a specific customer/supplier
 
-... 
+### Products <Badge text="TO DO" type="warning"/>
 
-#### Examples
+### Documents Issued
 
 ``` php
-{{...}}
+//Aliases
+$invoice = new Fatture;
+$receipt = new Ricevuta;
+$quotation = new Preventivi;
+$order = new Ordini;
+$dealing = new Rapporti;
+$credit_note = new Ndc;
+$proforma_invoice = new Proforma;
+$supplier_order = new OrdiniFornitori; 
+$delivery_note = new Ddt;
 ```
 
-### Documenti
+The possible document are:
+- invoice
+- receipt
+- quotation
+- order
+- credit note
+- proforma invoice
+- dealing
+- order supplier
+- transportation document
 
-... (Include some methods:)
-- **lista**: ...
-- **dettagli**: ...
-- **nuovo**: ...
-- **modifica**: ...
-- **elimina**: ...
-- **info**: ...
+#### Available Methods
+- **lista()**: return  a list of all documents;
+- **nuovo()**: it allows to create a new document
+- **importa()**: it allows to create document in batch
+- **modifica()**: it allows to edit a specific document
+- **elimina()**: it allows to delete a specific document
 
-#### Examples
+### Purchases  <Badge text="TO DO" type="warning"/>
 
-``` php
-{{...}}
-```
+### Compensation  <Badge text="TO DO" type="warning"/>
 
-### Fatture
+### Warehouse  <Badge text="TO DO" type="warning"/>
 
-... (Include this method:)
-- **pdf**: ...
+### Mail <Badge text="TO DO" type="warning"/>
 
-#### Examples
+### Use Cases
 
-``` php
-{{...}}
-```
+### Create an invoice
+Using Observer pattern create an invoice on Fatture in Cloud after order creation in your E-commerce application.
 
-### Fornitori
+### Update a customer
 
-... 
+Using Observer pattern when update a customer propagate the change/ also in Fatture in Cloud
 
-#### Examples
+### Add a new product
 
-``` php
-{{...}}
-```
+Using a job you can publish a new product on your ecommerce from Fatture in Cloud
 
-### NDC
-
-... 
-
-#### Examples
-
-``` php
-{{...}}
-```
-
-### Ordini
-
-... 
-
-#### Examples
-
-``` php
-{{...}}
-```
-
-### Preventivi
-
-... 
-
-#### Examples
-
-``` php
-{{...}}
-```
-
-### Proforma
-
-... 
-
-#### Examples
-
-``` php
-{{...}}
-```
-
-### Rapporti
-
-... 
-
-#### Examples
-
-``` php
-{{...}}
-```
-
-### Ricevute
-
-... 
-
-#### Examples
-
-``` php
-{{...}}
-```
-
-## Use Cases / Sync
-
-... (With our package you can sync FIC[^1] with your project. Let's look two methods with you can use this features.)
-
-### With event and listener (for store and update)
-
-... (Create event and listener that can be called in different method to save or update data. For example to save new clients)
-
-``` php
-{{...}}
-```
-
-### With job (for list)
-
-... (Create a scheduled job that, for example, every day update the list of available products)
-
-``` php
-{{...}}
-```
+### Update a product availability
+Using a job keep update a product avaiability on your ecommerce and also in Fatture in Cloud
 
 ## Roadmap :rocket:
-- **[Demo](#demo)**: ... (New repo where show examples and functionality)
-- **Test**: ... (For all endpoints)
-- **Validation**: ... (On input)
-- **Compatibility**: ... (add Laravel 8)
-
-## Demo
-
-In coming
-
-![Fatture in Cloud API section](./assets/images/fatture-in-cloud-api-section.png "Fatture in Cloud API section")
+- **Demo**: New repository with full examples and functionality. Synchronization from application and Fatture in Cloud and vice versa 
+- **Tests**: Add test to achieve 100% of test coverage
+- **More Validation**: Add more validations before send request to the API.
+- **L8 Compatibility**: Add Laravel 8 support
 
 ## Questions & issues
 Find yourself stuck using the package? Found a bug? Do you have general questions or suggestions for improving the plugin? Feel free to create an issue on [GitHub](https://github.com/offline-agency/laravel-fatture-in-cloud/issues), we’ll try to address it as soon as possible.
@@ -303,9 +147,9 @@ If you’ve found a bug regarding security please mail <support@offlineagency.co
 
 ## About Us
 
-[Offline Agency](https://offlineagency.it) is a webdesign agency based in Padua, Italy.
+[Offline Agency](https://offlineagency.it) is an agency based in Padua, Italy.
 
-Open source software is used in all projects we deliver. Laravel, Nginx, Ubuntu are just a few of the free pieces of software we use every single day. For this, we are very grateful. When we feel we have solved a problem in a way that can help other developers, we release our code as open source software on [GitHub](https://github.com/offline-agency).
+Open source software is used in all projects we deliver. This is just a few of the free pieces of software we use every single day. For this, we are very grateful. When we feel we have solved a problem in a way that can help other developers, we release our code as open source software on [GitHub](https://github.com/offline-agency).
 
 This package was made by [Giacomo Fabbian](https://github.com/Giacomo92). There are [many other contributors](https://github.com/offline-agency/laravel-fatture-in-cloud/graphs/contributors) who devoted time and effort to make this package better.
 
