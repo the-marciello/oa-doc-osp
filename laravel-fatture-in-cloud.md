@@ -37,6 +37,129 @@ php artisan vendor:publish --provider="OfflineAgency\FattureInCloud\FattureInClo
 
 ## Basic Usage
 Create a new invoice on FC
+
+
+
+``` php
+$invoiceRequest = [
+  'id_cliente' => '0',
+  'id_fornitore' => '0',
+  'nome' => 'Mario Rossi',
+  'indirizzo_via' => 'Via delle Betulle, 123',
+  'indirizzo_cap' => '21012',
+  'indirizzo_citta' => 'Curno',
+  'indirizzo_provincia' => 'BG',
+  'indirizzo_extra' => '',
+  'paese' => 'Italia',
+  'paese_iso' => 'IT',
+  'lingua' => 'it',
+  'piva' => 'IT1234567890',
+  'cf' => 'ABCDEF12G34H567I',
+  'autocompila_anagrafica' => false,
+  'salva_anagrafica' => false,
+  'numero' => '1a',
+  'data' => '21/01/2021',
+  'valuta' => 'EUR',
+  'valuta_cambio' => 1,
+  'prezzi_ivati' => false,
+  'rivalsa' => 0,
+  'cassa' => 0,
+  'rit_acconto' => 0,
+  'imponibile_ritenuta' => 0,
+  'rit_altra' => 0,
+  'marca_bollo' => 0,
+  'oggetto_visibile' => '',
+  'oggetto_interno' => '',
+  'centro_ricavo' => '',
+  'centro_costo' => '',
+  'note' => '',
+  'nascondi_scadenza' => false,
+  'ddt' => false,
+  'ftacc' => false,
+  'id_template' => '0',
+  'ddt_id_template' => '0',
+  'ftacc_id_template' => '0',
+  'mostra_info_pagamento' => false,
+  'metodo_pagamento' => 'Bonifico',
+  'metodo_titoloN' => 'IBAN',
+  'metodo_descN' => 'IT01A2345678900000000001234',
+  'mostra_totali' => 'tutti',
+  'mostra_bottone_paypal' => false,
+  'mostra_bottone_bonifico' => false,
+  'mostra_bottone_notifica' => false,
+  'lista_articoli' => 
+  [
+    0 => 
+    [
+      'id' => '0',
+      'codice' => '',
+      'nome' => 'Articolo 1',
+      'um' => '',
+      'quantita' => 1,
+      'descrizione' => '',
+      'categoria' => '',
+      'prezzo_netto' => 0,
+      'prezzo_lordo' => 0,
+      'cod_iva' => 0,
+      'tassabile' => true,
+      'sconto' => 0,
+      'applica_ra_contributi' => true,
+      'ordine' => 0,
+      'sconto_rosso' => 0,
+      'in_ddt' => false,
+      'magazzino' => true,
+    ],
+  ],
+  'lista_pagamenti' => 
+  [
+    0 => 
+    [
+      'data_scadenza' => '21/01/2021',
+      'importo' => 0,
+      'metodo' => 'not',
+      'data_saldo' => '21/01/2021',
+    ],
+  ],
+  'ddt_numero' => '',
+  'ddt_data' => '21/01/2021',
+  'ddt_colli' => '',
+  'ddt_peso' => '',
+  'ddt_causale' => '',
+  'ddt_luogo' => '',
+  'ddt_trasportatore' => '',
+  'ddt_annotazioni' => '',
+  'PA' => false,
+  'PA_tipo_cliente' => 'PA',
+  'PA_tipo' => 'nessuno',
+  'PA_numero' => '',
+  'PA_data' => '21/01/2021',
+  'PA_cup' => '',
+  'PA_cig' => '',
+  'PA_codice' => '',
+  'PA_pec' => '',
+  'PA_esigibilita' => 'N',
+  'PA_modalita_pagamento' => 'MP01',
+  'PA_istituto_credito' => '',
+  'PA_iban' => '',
+  'PA_beneficiario' => '',
+  'extra_anagrafica' => 
+  [
+    'mail' => 'info@mariorossi.it',
+    'tel' => '012345678',
+    'fax' => '012345678',
+  ],
+  'split_payment' => true,
+];
+
+$invoice = new Fatture;
+$invoiceResponse = $invoice->nuovo($invoiceRequest);
+
+if ($invoiceResponse->success) {//Invoice created
+    $doc_id = $invoiceResponse->new_id;
+} else {//Error
+    Log::error($invoiceResponse->error);
+}
+```
 ## Entities
 
 ### Account
@@ -118,17 +241,15 @@ The possible document are:
 
 ### Mail <Badge text="TO DO" type="warning"/>
 
-### Use Cases
+## Use Cases
 
 ### Create an invoice
-Using Observer pattern create an invoice on Fatture in Cloud after order creation in your E-commerce application.
+Using Observer pattern to create an invoice on Fatture in Cloud after order creation in your E-commerce application.
 
 ### Update a customer
-
-Using Observer pattern when update a customer propagate the change/ also in Fatture in Cloud
+Using Observer pattern when update a customer propagate the change also in Fatture in Cloud
 
 ### Add a new product
-
 Using a job you can publish a new product on your ecommerce from Fatture in Cloud
 
 ### Update a product availability
@@ -137,7 +258,7 @@ Using a job keep update a product avaiability on your ecommerce and also in Fatt
 ## Roadmap :rocket:
 - **Demo**: New repository with full examples and functionality. Synchronization from application and Fatture in Cloud and vice versa 
 - **Tests**: Add test to achieve 100% of test coverage
-- **More Validation**: Add more validations before send request to the API.
+- **More Validations**: Add more validations before send request to the API.
 - **L8 Compatibility**: Add Laravel 8 support
 
 ## Questions & issues
