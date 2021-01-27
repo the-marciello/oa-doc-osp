@@ -97,7 +97,7 @@ export default {
       border-left none
 
 .sidebar-heading
-  color $textColor
+  color $titleColor
   transition color .15s ease
   cursor pointer
   font-size 1.1em
@@ -108,6 +108,8 @@ export default {
   box-sizing border-box
   margin 0
   border-left 0.25rem solid transparent
+  span
+    color $titleColor
   &.open, &:hover
     color inherit
   .arrow
