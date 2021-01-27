@@ -1,10 +1,14 @@
 module.exports = {
-    title: 'OA Docs',
-    description: '',
+    title: 'Documentation | OFFLINE Agency',
+    description: 'Documentation for our comprehensive packages.',
+    head:[
+        ['link', { rel: 'icon', href: '/favicon.svg' }]
+    ],
     themeConfig: {
+        logo: 'https://offlineagency.it/build/oa-assets/img/oa-eb.png',
         nav: [
             { text: 'OA', link: 'https://offlineagency.it' },
-            { text: 'Github', link: 'https://github.com/offline-agency' },
+            { text: 'GitHub', link: 'https://github.com/offline-agency' },
         ],
         sidebar: 'auto',
         footer: 'auto'
@@ -12,7 +16,7 @@ module.exports = {
     locales:{
         '/': {
             lang: 'English',
-            title: 'Offline Agency Docs',
+            title: 'Documentation | OFFLINE Agency',
             description: ''
         }
     },

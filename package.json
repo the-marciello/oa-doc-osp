@@ -1,7 +1,7 @@
 {
   "name": "oa-doc-out",
   "version": "1.0.0",
-  "description": "Offline Agency external documentation",
+  "description": "OFFLINE Agency external documentation",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,15 +11,15 @@
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/matteogiacomo/oa-doc-out.git"
   },
-  "author": "Offline Agency",
+  "author": "OFFLINE Agency",
   "license": "ISC",
   "homepage": "https://bitbucket.org/matteogiacomo/oa-doc-out#readme",
   "dependencies": {
-    "@vuepress/plugin-google-analytics": "^1.5.1",
+    "@vuepress/plugin-google-analytics": "^1.8.0",
     "markdown-it-footnote": "^3.0.2",
-    "vue-i18n": "^8.18.2",
-    "vuepress": "^1.5.1",
-    "vuepress-plugin-clean-urls": "^1.0.3",
-    "vuepress-plugin-container": "^2.1.4"
+    "vue-i18n": "^8.22.4",
+    "vuepress": "^1.8.0",
+    "vuepress-plugin-clean-urls": "^1.1.2",
+    "vuepress-plugin-container": "^2.1.5"
   }
 }
