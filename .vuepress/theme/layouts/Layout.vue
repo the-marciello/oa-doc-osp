@@ -150,3 +150,9 @@ export default {
   }
 }
 </script>
+
+<style>
+img + .icon.outbound {
+  display: none;
+}
+</style>
