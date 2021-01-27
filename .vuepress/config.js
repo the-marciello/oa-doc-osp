@@ -2,7 +2,7 @@ module.exports = {
     title: 'Documentation | OFFLINE Agency',
     description: 'Documentation for our comprehensive packages.',
     head:[
-        ['link', { rel: 'icon', href: '/favicon.svg' }]
+        ['link', { rel: 'icon', href: '/favicon.ico' }]
     ],
     themeConfig: {
         logo: 'https://offlineagency.it/build/oa-assets/img/oa-eb.png',

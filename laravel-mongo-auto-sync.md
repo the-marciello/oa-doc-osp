@@ -9,8 +9,8 @@ gitName: laravel-mongo-auto-sync
 This package provides a better support for [MongoDB](https://www.mongodb.com) relationships in [Laravel](https://laravel.com/) Projects.
 At low level all CRUD operations has been handled by [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb)
 
-[![Github](./assets/icon/github.svg "Github Icon")](https://github.com/offline-agency/laravel-mongo-auto-sync)
 
+[![Github](./assets/icon/github.svg "Github Icon")](https://github.com/offline-agency/laravel-mongo-auto-sync)
 [![Latest Stable Version](https://poser.pugx.org/offline-agency/laravel-mongo-auto-sync/v/stable)](https://packagist.org/packages/offline-agency/laravel-mongo-auto-sync)
 [![Total Downloads](https://img.shields.io/packagist/dt/offline-agency/laravel-mongo-auto-sync.svg?style=flat-square)](https://packagist.org/packages/offline-agency/laravel-mongo-auto-sync)
 [![Build Status](https://img.shields.io/github/workflow/status/offline-agency/laravel-mongo-auto-sync/CI)](https://github.com/offline-agency/laravel-mongo-auto-sync/actions)
