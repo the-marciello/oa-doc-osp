@@ -159,4 +159,8 @@ export default {
   background-position top center
   background-size 100%
 
+img + .icon.outbound {
+  display: none;
+}
+
 </style>
