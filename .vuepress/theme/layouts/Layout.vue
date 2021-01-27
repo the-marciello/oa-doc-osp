@@ -150,3 +150,13 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus">
+
+.index
+  background-image url("../../../assets/images/oa-doc-bg.jpg")
+  background-repeat no-repeat
+  background-position top center
+  background-size 100%
+
+</style>

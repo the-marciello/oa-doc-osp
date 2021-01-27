@@ -1,11 +1,15 @@
 ---
 home: true
-heroImage: https://offlineagency.it/build/oa-assets/img/oa-eb.png
-heroText: Offline Agency Docs
+pageClass: index
+heroImage: 
+heroText: Docs
 tagline: Documentation for our comprehensive packages
 actionText: 
 actionLink: 
-heroTitle: Overview
+cat1Title: Open source packages
+cat1DescriptionL1: We like to use Laravel for most of our projects and love to contribute to the Laravel ecosystem.
+cat1DescriptionL2: Since 2017 we have been building Laravel and PHP packages for our client work. When we discover functionality in client projects that is useful for others, we extract it to an open source package.
+
 projectTypes: 
 - title: Laravel
 projects:
