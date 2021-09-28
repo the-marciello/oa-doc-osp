@@ -5,7 +5,7 @@ module.exports = {
         ['link', { rel: 'icon', href: '/favicon.png' }]
     ],
     themeConfig: {
-        logo: 'https://offlineagency.it/build/oa-assets/img/oa-eb.png',
+        logo: '/oa-eb.png',
         nav: [
             { text: 'OA', link: 'https://offlineagency.it' },
             { text: 'GitHub', link: 'https://github.com/offline-agency' },
