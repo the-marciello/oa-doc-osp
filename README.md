@@ -21,6 +21,14 @@ projects:
   link: /laravel-fatture-in-cloud
   type: Laravel
   details: An integration plugin with Fatture in Cloud Api written in Laravel PHP.
+- title: laravel-cart
+  link: /laravel-cart
+  type: Laravel
+  details: A simple cart implementation for Laravel with fiscal support.
+- title: laravel-webex
+  link: /laravel-webex
+  type: Laravel
+  details: A simple Laravel integration with Webex.
 - title: 
   link: 
   details: 
