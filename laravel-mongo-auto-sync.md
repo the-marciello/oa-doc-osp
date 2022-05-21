@@ -19,6 +19,31 @@ At low level all CRUD operations has been handled by [jenssegers/laravel-mongodb
 [![StyleCI](https://github.styleci.io/repos/167277388/shield)](https://styleci.io/repos/167277388)
 [![codecov](https://codecov.io/gh/offline-agency/laravel-mongo-auto-sync/branch/master/graph/badge.svg?token=0BHADJQYAW)](https://codecov.io/gh/offline-agency/laravel-mongo-auto-sync)
 
+## Installation
+
+```bash
+composer require offlineagency/laravel-mongo-auto-sync
+```
+
+### Prerequisites
+Make sure you have the MongoDB PHP driver installed. You can find installation instructions at [http://php.net/manual/en/mongodb.installation.php](http://php.net/manual/en/mongodb.installation.php)
+
+### Package version Compatibility
+
+| This package | Laravel | Laravel MongoDB |
+| ------------ | ------- | --------------- |
+| 1.x          | 5.8.x   | 3.5.x           |
+| 1.x          | 6.x     | 3.6.x           |
+| 2.x          | 5.8.x   | 3.5.x           |
+| 2.x          | 6.x     | 3.6.x           |
+| 2.x          | 7.x     | 3.7.x           |
+| 2.x          | 8.x     | 3.8.x           |
+| 2.x          | 9.x     | 3.9.x           |
+
+### PHP Version Compatibility
+- Version 1: PHP 7.1, 7.2, 7.3
+- Version 2: PHP 7.4+
+
 ## Features
 - Sync changes between collection with relationships after CRUD operations
     - EmbedsOne & EmbedsMany 
@@ -93,27 +118,6 @@ You can see the new article on the category page because the package synchronize
 - Ecommerce
 - API System for mobile application o for generated static site
 - Any projects that require fast read operations and (slow) write operations that can be run on background
-
-## Installation
-
-### Prerequisites
-Make sure you have the MongoDB PHP driver installed. You can find installation instructions at [http://php.net/manual/en/mongodb.installation.php](http://php.net/manual/en/mongodb.installation.php)
-
-### Laravel version Compatibility
-
-| Laravel     | Package     |
-| ----------- | ----------- |
-| 5.8.x       | 1.x         |
-| 6.x         | 1.x         |
-| 7.x         | <Badge text="TO BE TEST" type="warning"/> 2.0-alpha.1 (Pre-release)         |
-
-### Composer Installation
-
-Install the package via Composer:
-
-``` bash 
-composer require offlineagency/laravel-mongo-auto-sync
-```
 
 ### Before starting 
 
