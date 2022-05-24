@@ -5,16 +5,15 @@ meta:
 gitName: laravel-aruba-sms
 ---
 
-
 # laravel-aruba-sms
 
 This package makes it easy to send SMS notifications using SMS Aruba API with Laravel.
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/offline-agency/laravel-aruba-sms.svg?style=flat-square)](https://packagist.org/packages/offline-agency/laravel-aruba-sms)
-[![Total Downloads](https://img.shields.io/packagist/dt/offline-agency/laravel-aruba-sms.svg?style=flat-square)](https://packagist.org/packages/offline-agency/laravel-aruba-sms)
-![GitHub Actions](https://github.com/offline-agency/laravel-aruba-sms/actions/workflows/main.yml/badge.svg)
-
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+[![Github](./assets/icon/github.svg "Github Icon")](https://github.com/offline-agency/laravel-aruba-sms)
+[![Latest Stable Version](https://poser.pugx.org/offline-agency/laravel-aruba-sms/v/stable)](https://packagist.org/packages/offline-agency/laravel-aruba-sms)
+[![Total Downloads](https://img.shields.io/packagist/dt/offline-agency/laravel-aruba-smsc.svg?style=flat-square)](https://packagist.org/packages/offline-agency/laravel-aruba-sms)
+[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![codecov](https://codecov.io/gh/offline-agency/laravel-aruba-sms/branch/master/graph/badge.svg?token=0BHADJQYAW)](https://codecov.io/gh/offline-agency/laravel-aruba-sms)
 
 ## Installation
 
@@ -26,11 +25,13 @@ composer require offline-agency/laravel-aruba-sms
 
 ## Usage
 
+### Notification
+
 ```php
 // Usage description here
 ```
 
-### Testing
+## Testing
 
 ```bash
 composer test

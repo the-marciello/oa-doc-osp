@@ -9,11 +9,13 @@ gitName: laravel-cart
 
 A simple cart implementation for Laravel with fiscal support.
 
+[![Github](./assets/icon/github.svg "Github Icon")](https://github.com/offline-agency/laravel-cart)
 [![Latest Stable Version](https://poser.pugx.org/offline-agency/laravel-cart/v/stable)](https://packagist.org/packages/offline-agency/laravel-cart)
+[![Total Downloads](https://img.shields.io/packagist/dt/offline-agency/laravel-cart.svg?style=flat-square)](https://packagist.org/packages/offline-agency/laravel-cart)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Laravel](https://github.com/offline-agency/laravel-cart/actions/workflows/laravel.yml/badge.svg?branch=main)](https://github.com/offline-agency/laravel-cart/actions/workflows/laravel.yml)
-[![StyleCI](https://github.styleci.io/repos/167236902/shield)](https://styleci.io/repos/167236902)
-[![Total Downloads](https://img.shields.io/packagist/dt/offline-agency/laravel-cart.svg?style=flat-square)](https://packagist.org/packages/offline-agency/laravel-cart)
+[![StyleCI](https://github.styleci.io/repos/167277388/shield)](https://styleci.io/repos/167277388)
+<!--[![codecov](https://codecov.io/gh/offline-agency/laravel-cart/branch/master/graph/badge.svg?token=0BHADJQYAW)](https://codecov.io/gh/offline-agency/laravel-cart)-->
 
 ## Installation
 

@@ -9,11 +9,11 @@ gitName: laravel-fatture-in-cloud-v2
 
 A simple Laravel integration with Fatture in Cloud APIs v2.
 
+[![Github](./assets/icon/github.svg "Github Icon")](https://github.com/offline-agency/laravel-fatture-in-cloud-v2)
 [![Latest Stable Version](https://poser.pugx.org/offline-agency/laravel-fatture-in-cloud-v2/v/stable)](https://packagist.org/packages/offline-agency/laravel-fatture-in-cloud-v2)
-[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Laravel](https://github.com/offline-agency/laravel-fatture-in-cloud-v2/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/offline-agency/laravel-fatture-in-cloud-v2/actions/workflows/main.yml)
-[![StyleCI](https://github.styleci.io/repos/167236902/shield)](https://styleci.io/repos/167236902)
 [![Total Downloads](https://img.shields.io/packagist/dt/offline-agency/laravel-fatture-in-cloud-v2.svg?style=flat-square)](https://packagist.org/packages/offline-agency/laravel-fatture-in-cloud-v2)
+[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![StyleCI](https://github.styleci.io/repos/167236902/shield)](https://styleci.io/repos/167236902)
 
 ## Installation
 
@@ -25,6 +25,7 @@ Run the Composer require command from the Terminal:
 composer require offline-agency/laravel-fatture-in-cloud-v2
 ```
 
+<!--
 ## Usage
 
 ```php
@@ -36,6 +37,7 @@ composer require offline-agency/laravel-fatture-in-cloud-v2
 ```php
 // Examples here
 ```
+-->
 
 ## Testing
 
