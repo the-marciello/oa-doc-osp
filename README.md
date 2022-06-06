@@ -29,6 +29,10 @@ projects:
   link: /laravel-webex
   type: Laravel
   details: A simple Laravel integration with Webex.
+- title: laravel-aruba-sms
+  link: /laravel-aruba-sms
+  type: Laravel
+  details: This package makes it easy to send SMS notifications using SMS Aruba API with Laravel.
 - title: 
   link: 
   details: 
