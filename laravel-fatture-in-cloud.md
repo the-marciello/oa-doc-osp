@@ -11,11 +11,12 @@ This Laravel wrapper allows you to integrate a Laravel e-commerce platform with 
 
 [![Github](./assets/icon/github.svg "Github Icon")](https://github.com/offline-agency/laravel-fatture-in-cloud)
 [![Latest Stable Version](https://poser.pugx.org/offline-agency/laravel-fatture-in-cloud/v/stable)](https://packagist.org/packages/offline-agency/laravel-fatture-in-cloud)
+[![Total Downloads](https://img.shields.io/packagist/dt/offline-agency/laravel-fatture-in-cloud.svg?style=flat-square)](https://packagist.org/packages/offline-agency/laravel-fatture-in-cloud)
+[![Build Status](https://img.shields.io/github/workflow/status/offline-agency/laravel-fatture-in-cloud/CI)](https://github.com/offline-agency/laravel-fatture-in-cloud/actions)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/offline-agency/laravel-fatture-in-cloud/master.svg?style=flat-square)](https://travis-ci.org/offline-agency/laravel-fatture-in-cloud)
-[![Quality Score](https://img.shields.io/scrutinizer/g/offline-agency/laravel-fatture-in-cloud.svg?style=flat-square)](https://scrutinizer-ci.com/g/offline-agency/laravel-fatture-in-cloud/)
 [![StyleCI](https://github.styleci.io/repos/167236902/shield)](https://styleci.io/repos/167236902)
-[![Total Downloads](https://img.shields.io/packagist/dt/offline-agency/laravel-fatture-in-cloud.svg?style=flat-square)](https://packagist.org/packages/offline-agency/laravel-fatture-in-cloud)
+[![codecov](https://codecov.io/gh/offline-agency/laravel-fatture-in-cloud/branch/master/graph/badge.svg?token=0BHADJQYAW)](https://codecov.io/gh/offline-agency/laravel-fatture-in-cloud)
 
 ## Installation and setup
 
