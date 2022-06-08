@@ -5,6 +5,10 @@ meta:
 gitName: laravel-fatture-in-cloud
 ---
 
+::: tip
+A new version of laravel-fatture-in-cloud is available, you can find the documentation [here](https://docs.offlineagency.com/laravel-fatture-in-cloud-v2/)
+:::
+
 # laravel-fatture-in-cloud
 
 This Laravel wrapper allows you to integrate a Laravel e-commerce platform with the invoicing program [Fatture in Cloud](https://fattureincloud.it) using Api.
