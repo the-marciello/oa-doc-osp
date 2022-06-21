@@ -131,6 +131,9 @@ It returns the same class of detail method  with all its fields.
 Each callback accept a number of parameters equals to the sum of the required parameters +1 that is $additional_data
 that accept all optional parameters.
 
+### Validation
+For POST endpoint the package validate body using [Validators](https://laravel.com/docs/9.x/validation#manually-creating-validators). If something goes wrong the method returns an instance of `\Illuminate\Support\MessageBag`.
+
 ### Pagination
 Package provide some pagination methods for list endpoints. Let's see a few examples:
 
