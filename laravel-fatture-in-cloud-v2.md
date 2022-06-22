@@ -16,7 +16,7 @@ A simple Laravel integration with [Fatture in Cloud APIs v2](https://developers.
 [![StyleCI](https://github.styleci.io/repos/167236902/shield)](https://styleci.io/repos/167236902)
 
 ::: warning
-This is the documentation for the API v2. You can find the package for the v1 [here](https://docs.offlineagency.com/laravel-fatture-in-cloud/#laravel-fatture-in-cloud)
+This is the documentation for the API v2. You can find the package for the API v1 [here](https://docs.offlineagency.com/laravel-fatture-in-cloud/#laravel-fatture-in-cloud)
 :::
 
 ## Installation
