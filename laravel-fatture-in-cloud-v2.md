@@ -93,7 +93,9 @@ $issued_document_list->getPagination()->goToFirstPage();
 $issued_document_list->getPagination()->goToLastPage();
 ```
 
-### Bin [![HOT](https://img.shields.io/static/v1.svg?label=&message=HOT&color=red)]()
+### Bin
+[![HOT](https://img.shields.io/static/v1.svg?label=&message=HOT&color=red)]()
+
 This package provides bin() method for deleted issued documents that allow you to get its detail. This is very useful, for example, when you convert a
 proforma into an invoice (deleting the proforma) and you need old document's detail. Let's see an example:
 
@@ -102,7 +104,9 @@ $issued_documents = new \OfflineAgency\LaravelFattureInCloudV2\Api\IssuedDocumen
 $response = $issued_documents->bin($document_id);
 ```
 
-### Rate limit [![HOT](https://img.shields.io/static/v1.svg?label=&message=HOT&color=red)]()
+### Rate limit
+[![HOT](https://img.shields.io/static/v1.svg?label=&message=HOT&color=red)]()
+
 This package provides a method to intercept throttle errors (403, 429) and automatically retry.
 You can specify limits on your config, remember to use milliseconds to indicate time:
 
@@ -125,7 +129,7 @@ $client_list = $client->list();
 
 This snippet returns an instance of `\OfflineAgency\LaravelFattureInCloudV2\Entities\Client\ClientList` that provide 2 public methods:
 - `getItems()` that returns an array of `\OfflineAgency\LaravelFattureInCloudV2\Entities\Client\Client` from which you can access to all client's fields
-- `getPagination()` that returns an instance of `\OfflineAgency\LaravelFattureInCloudV2\Entities\Client\ClientPagination` from which you can access to all pagination's fields and [methods](#Pagination)
+- `getPagination()` that returns an instance of `\OfflineAgency\LaravelFattureInCloudV2\Entities\Client\ClientPagination` from which you can access to all pagination's fields and [methods](#pagination)
 
 You can also specify query parameters passing an array:
 ```php
