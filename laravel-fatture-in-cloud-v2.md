@@ -163,6 +163,8 @@ The package validates body using Laravel [Validators](https://laravel.com/docs/9
 
 ## Api coverage
 
+We are currently work on this package to implement all endpoints. Enable notifications on [GitHub](https://github.com/offline-agency/laravel-fatture-in-cloud-v2) to be notified when new API are released.
+
 ✅ = implemented
 
 🔜 = coming soon
