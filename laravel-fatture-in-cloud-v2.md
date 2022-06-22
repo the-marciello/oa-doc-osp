@@ -157,142 +157,168 @@ The package validates body using Laravel [Validators](https://laravel.com/docs/9
 
 ## Api coverage
 
-#### User
+✅ = implemented
 
-- [ ] Get User Info [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] List User Companies [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+🔜 = coming soon
+
+❌ = not implemented
+
+Each response entity has this prefix on the namespace: `\OfflineAgency\LaravelFattureInCloudV2\Entities\`
+
+#### User
+| Done | Endpoint | Type | Response |
+| ---- | -------- | ---- | -------- |
+| ❌ | Get User Info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List User Companies | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 
 #### Companies
+| Done | Endpoint | Type | Response |
+| ---- | -------- | ---- | -------- |
+| ❌ | Get Company Info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 
-- [ ] Get Company Info [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-
-#### Clients ✅
-
-- [X] List clients [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [X] Create client [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [X] Get client [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [X] Modify client [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
-- [X] Delete client [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+#### Clients
+| Done | Endpoint | Type | Response |
+| ---- | -------- | ---- | -------- |
+| ✅ | List clients | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | `Client\ClientList` |
+| ✅ | Create client | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | `Client\Client` |
+| ✅ | Get client | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | `Client\Client` |
+| ✅ | Modify client | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | `Client\Client` |
+| ✅ | Delete client | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | `'Client deleted'` |
 
 #### Suppliers
 
-- [ ] List Suppliers [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Create Supplier [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [ ] Get Supplier [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Modify Supplier [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
-- [ ] Delete Supplier [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+| Done | Endpoint | Type | Response |
+| ---- | -------- | ---- | -------- |
+| 🔜 | List Suppliers | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | Create Supplier | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| 🔜 | Get Supplier | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | Modify Supplier | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
+| 🔜 | Delete Supplier | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
 
-#### Products ✅
-- [X] List products [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [X] Create product [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [X] Get product [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [X] Modify product [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
-- [X] Delete product [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+#### Products
+| Done | Endpoint | Type | Response |
+| ---- | -------- | ---- | -------- |
+| ✅ | List products | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | `Product\ProductList` |
+| ✅ | Create product | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | `Product\Product` |
+| ✅ | Get product | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | `Product\Product` |
+| ✅ | Modify product | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | `Product\Product` |
+| ✅ | Delete product | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | `'Product deleted'` |
 
-#### Issued Documents ✅
-
-- [X] List Issued Documents [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [X] Create Issued Documents [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [X] Get Issued Document [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [X] Get Deleted Document [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [X] Modify Issued Document [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
-- [X] Delete Issued Document [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
-- [X] Get New Issued Document Totals [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [X] Get Existing Issued Document Totals [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [X] Upload Issued Document Attachment [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [X] Delete Issued Document Attachment [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
-- [X] Get Issued Document Pre-create info [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [X] Get Email Data [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [X] Schedule Email [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+#### Issued Documents
+| Done | Endpoint | Type | Response |
+| ---- | -------- | ---- | -------- |
+| ✅ | List Issued Documents | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | `IssuedDocument\IssuedDocumentList` |
+| ✅ | Create Issued Documents | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | `IssuedDocument\IssuedDocument` |
+| ✅ | Get Issued Document | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | `IssuedDocument\IssuedDocument` |
+| ✅ | Get Deleted Document | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | `IssuedDocument\IssuedDocument` |
+| ✅ | Modify Issued Document | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | `IssuedDocument\IssuedDocument` |
+| ✅ | Delete Issued Document | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | `'Document deleted'` |
+| ✅ | Get New Issued Document Totals | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | `IssuedDocument\IssuedDocumentTotals` |
+| ✅ | Get Existing Issued Document Totals | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | `IssuedDocument\IssuedDocumentTotals` |
+| ✅ | Upload Issued Document Attachment | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | `IssuedDocument\IssuedDocumentAttachment` |
+| ✅ | Delete Issued Document Attachment | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | `'Attachment deleted'` |
+| ✅ | Get Issued Document Pre-create info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | `IssuedDocument\IssuedDocumentPreCreateInfo` |
+| ✅ | Get Email Data | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | `IssuedDocument\IssuedDocumentEmail` |
+| ✅ | Schedule Email | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | `IssuedDocument\IssuedDocumentScheduleEmail` |
 
 #### Issued e-invoice
-
-- [ ] Send the e-invoice [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [ ] Verify e-invoice XML [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Get e-invoice XML [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Get e-invoice rejection reason [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+| Done | Endpoint | Type | Response |
+| ---- | -------- | ---- | -------- |
+| ❌ | Send the e-invoice | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Verify e-invoice XML | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Get e-invoice XML | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Get e-invoice rejection reason | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 
 #### Received Documents
-
-- [ ] List Received Documents [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Create Received Document [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [ ] Get Received Document [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Modify Received Document [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
-- [ ] Delete Received Document [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
-- [ ] Get New Received Document Totals [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [ ] Get Existing Received Document Totals [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [ ] Upload Received Document Attachment [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [ ] Delete Received Document Attachment [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
-- [ ] Get Received Document Pre-create info [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+| Done | Endpoint | Type | Response |
+| ---- | -------- | ---- | -------- |
+| ❌ | List Received Documents | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Create Received Document | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Get Received Document | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Modify Received Document | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
+| ❌ | Delete Received Document | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
+| ❌ | Get New Received Document Totals | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Get Existing Received Document Totals | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Upload Received Document Attachment | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Delete Received Document Attachment | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
+| ❌ | Get Received Document Pre-create info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 
 #### Receipts
-
-- [ ] List Receipts [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Create Receipts [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [ ] Get Receipts [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Modify Receipts [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
-- [ ] Delete Receipts [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
-- [ ] Get Receipts Pre-Create Info [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Get Receipts Monthly Totals [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+| Done | Endpoint | Type | Response |
+| ---- | -------- | ---- | -------- |
+| ❌ | List Receipts | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Create Receipts | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Get Receipts | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Modify Receipts | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
+| ❌ | Delete Receipts | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
+| ❌ | Get Receipts Pre-Create Info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Get Receipts Monthly Totals | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 
 #### Taxes
-
-- [ ] List F24 [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Create F24 [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [ ] Get RF24 [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Modify F24 [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
-- [ ] Delete F24 [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
-- [ ] Upload F24 Attachment [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [ ] Delete F24 Attachment [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+| Done | Endpoint | Type | Response |
+| ---- | -------- | ---- | -------- |
+| ❌ | List F24 | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Create F24 | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Get RF24 | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Modify F24 | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
+| ❌ | Delete F24 | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
+| ❌ | Upload F24 Attachment | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Delete F24 Attachment | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
 
 #### Archive
-
-- [ ] List Archive Documents [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Create Archive Documents [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [ ] Get Archive Documents [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Modify Archive Documents [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
-- [ ] Delete Archive Documents [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
-- [ ] Upload Archive Documents Attachment [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+| Done | Endpoint | Type | Response |
+| ---- | -------- | ---- | -------- |
+| ❌ | List Archive Documents | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Create Archive Documents | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Get Archive Documents | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Modify Archive Documents | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
+| ❌ | Delete Archive Documents | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
+| ❌ | Upload Archive Documents Attachment | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
 
 #### Cashbook
-
-- [ ] List Cashbook Entries [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Create Cashbook Entries [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [ ] Get Cashbook Entries [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Modify Cashbook Entries [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
-- [ ] Delete Cashbook Entries [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+| Done | Endpoint | Type | Response |
+| ---- | -------- | ---- | -------- |
+| ❌ | List Cashbook Entries | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Create Cashbook Entries | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Get Cashbook Entries | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Modify Cashbook Entries | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
+| ❌ | Delete Cashbook Entries | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
 
 #### Info
-- [ ] List Countries [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] List Detailed Countries [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] List Cities [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] List Languages [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] List Templates [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] List Currencies [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] List Units of Measure [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] List Delivery Notes Default Casuals [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] List Vat Types [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] List Payment Methods [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] List Payment Accounts [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] List Revenue Centers [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] List Cost Centers [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] List Product Categories [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] List Received Document Categories [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] List Archive Categories [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+| Done | Endpoint | Type | Response |
+| ---- | -------- | ---- | -------- |
+| ❌ | List Countries | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List Detailed Countries | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List Cities | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List Languages | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List Templates | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List Currencies | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List Units of Measure | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List Delivery Notes Default Casuals | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List Vat Types | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List Payment Methods | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List Payment Accounts | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List Revenue Centers | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List Cost Centers | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List Product Categories | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List Received Document Categories | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List Archive Categories | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 
 #### Settings
-- [ ] Create Payment Method [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [ ] Get Payment Method [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Modify Payment Method [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
-- [ ] Delete Payment Method [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
-- [ ] Create Payment Account [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [ ] Get Payment Account [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Modify Payment Account [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
-- [ ] Delete Payment Account [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
-- [ ] Create Vat Type [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [ ] Get Vat Type [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [ ] Modify Vat Type [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
-- [ ] Delete Vat Type [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+| Done | Endpoint | Type | Response |
+| ---- | -------- | ---- | -------- |
+| ❌ | Create Payment Method | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Get Payment Method | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Modify Payment Method | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
+| ❌ | Delete Payment Method | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
+| ❌ | Create Payment Account | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Get Payment Account | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Modify Payment Account | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
+| ❌ | Delete Payment Account | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
+| ❌ | Create Vat Type | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Get Vat Type | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Modify Vat Type | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
+| ❌ | Delete Vat Type | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
 
 ## Testing
 
