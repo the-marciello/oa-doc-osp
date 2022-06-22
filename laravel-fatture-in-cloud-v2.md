@@ -15,6 +15,10 @@ A simple Laravel integration with [Fatture in Cloud APIs v2](https://developers.
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![StyleCI](https://github.styleci.io/repos/167236902/shield)](https://styleci.io/repos/167236902)
 
+::: warning
+This is the documentation for the API v2. You can find the package for the v1 [here](https://docs.offlineagency.com/laravel-fatture-in-cloud/#laravel-fatture-in-cloud)
+:::
+
 ## Installation
 
 Install the package through [Composer](http://getcomposer.org/).
@@ -28,7 +32,7 @@ composer require offline-agency/laravel-fatture-in-cloud-v2
 You should publish config file with:
 
 ```bash
-php artisan vendor:publish --provider="Offlineagency\LaravelWebex\Providers\LaravelWebexServiceProvider"
+php artisan vendor:publish --provider="OfflineAgency\LaravelFattureInCloudV2\LaravelFattureInCloudV2ServiceProvider"
 ```
 
 ## Configuration
