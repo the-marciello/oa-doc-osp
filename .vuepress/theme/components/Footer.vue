@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    © {{ new Date().getFullYear() }}
+    © 2019 - {{ new Date().getFullYear() }}
 
     <a href="https://offlineagency.it/" target="_blank">OFFLINE Agency</a> |
     <router-link :to="$localePath" class="home-link">Documentation</router-link>
