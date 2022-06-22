@@ -5,10 +5,6 @@ meta:
 gitName: laravel-fatture-in-cloud-v2
 ---
 
-::: warning
-This documentation has not yet been implemented.
-:::
-
 # laravel-fatture-in-cloud-v2
 
 A simple Laravel integration with [Fatture in Cloud APIs v2](https://developers.fattureincloud.it/).
@@ -68,9 +64,47 @@ $issued_documents = new \OfflineAgency\LaravelFattureInCloudV2\Api\IssuedDocumen
 
 ## Features
 
-### Rate limit
+### Pagination
+This package provides a pagination system that allow you to move between pages using simple methods:
 
-Package provide a method to intercept throttle errors (403, 429) and automatically retry. You can specify limits on your config, remember to use ms:
+```php
+$issued_documents = new \OfflineAgency\LaravelFattureInCloudV2\Api\IssuedDocument();
+$issued_document_list = $issued_documents->list('invoice');
+
+// check if the response has more than one page
+$issued_document_list->getPagination()->isSinglePage();
+
+// check if the document has a next page
+$issued_document_list->getPagination()->hasNextPage();
+
+// check if the document has a previous page
+$issued_document_list->getPagination()->hasPrevPage();
+
+// return documents of the next page
+$issued_document_list->getPagination()->goToNextPage();
+
+// return documents of the previous page
+$issued_document_list->getPagination()->goToPrevPage();
+
+// return documents of the first page
+$issued_document_list->getPagination()->goToFirstPage();
+
+// return documents of the last page
+$issued_document_list->getPagination()->goToLastPage();
+```
+
+### Bin [![HOT](https://img.shields.io/static/v1.svg?label=&message=HOT&color=red)]()
+This package provides bin() method for deleted issued documents that allow you to get its detail. This is very useful, for example, when you convert a
+proforma into an invoice (deleting the proforma) and you need old document's detail. Let's see an example:
+
+```php
+$issued_documents = new \OfflineAgency\LaravelFattureInCloudV2\Api\IssuedDocument();
+$response = $issued_documents->bin($document_id);
+```
+
+### Rate limit [![HOT](https://img.shields.io/static/v1.svg?label=&message=HOT&color=red)]()
+This package provides a method to intercept throttle errors (403, 429) and automatically retry.
+You can specify limits on your config, remember to use milliseconds to indicate time:
 
 ```php
 'limits' => [
@@ -80,19 +114,80 @@ Package provide a method to intercept throttle errors (403, 429) and automatical
 ],
 ```
 
-### Issued document bin
-
-Package provide bin() method for deleted issued documents that allow you to get its detail. This is very useful, for example, when you convert a
-proforma into an invoice (deleting the proforma) and you need old document's detail. Let's see an example:
+## Usage instructions & examples
+This package provides a class for each api group like clients, issued documents, products... After instantiate one of them you can access to all its endpoints. 
+Here you can see an example of just how simple this package is to use.
 
 ```php
-$issued_documents = new \OfflineAgency\LaravelFattureInCloudV2\Api\IssuedDocument();
-$response = $issued_documents->bin($document_id);
+$client = new \OfflineAgency\LaravelFattureInCloudV2\Api\Client();
+$client_list = $client->list();
 ```
 
-It returns the same class of detail method  with all its fields.
+This snippet returns an instance of `\OfflineAgency\LaravelFattureInCloudV2\Entities\Client\ClientList` that provide 2 public methods:
+- `getItems()` that returns an array of `\OfflineAgency\LaravelFattureInCloudV2\Entities\Client\Client` from which you can access to all client's fields
+- `getPagination()` that returns an instance of `\OfflineAgency\LaravelFattureInCloudV2\Entities\Client\ClientPagination` from which you can access to all pagination's fields and [methods](#Pagination)
+
+You can also specify query parameters passing an array:
+```php
+$client = new \OfflineAgency\LaravelFattureInCloudV2\Api\Client();
+$client_list = $client->list([
+    'per_page' => 50
+]);
+```
+
+If the endpoint expect one or more required parameters and if it's a GET endpoint you can provide them as the follow:
+```php
+$product = new \OfflineAgency\LaravelFattureInCloudV2\Api\Product();
+$product_detail = $product->detail($product_id, [
+    'fields' => 'id,name,code'
+]);
+```
+
+If the endpoint is a POST/PUT one you only need to provide an array with all parameters (required and not):
+```php
+$product = new \OfflineAgency\LaravelFattureInCloudV2\Api\Product();
+$new_product = $product->create([
+    'data' => [
+        'name' => $product_name,
+        'code' => $product_code
+    ],
+]);
+```
+The package validates body using Laravel [Validators](https://laravel.com/docs/9.x/validation#manually-creating-validators). If something goes wrong the method returns an instance of `\Illuminate\Support\MessageBag` that contains all errors.
 
 ## Api coverage
+
+#### User
+
+- [ ] Get User Info [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] List User Companies [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+
+#### Companies
+
+- [ ] Get Company Info [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+
+#### Clients ✅
+
+- [X] List clients [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [X] Create client [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+- [X] Get client [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [X] Modify client [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
+- [X] Delete client [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+
+#### Suppliers
+
+- [ ] List Suppliers [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Create Supplier [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+- [ ] Get Supplier [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Modify Supplier [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
+- [ ] Delete Supplier [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+
+#### Products ✅
+- [X] List products [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [X] Create product [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+- [X] Get product [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [X] Modify product [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
+- [X] Delete product [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
 
 #### Issued Documents ✅
 
@@ -110,68 +205,94 @@ It returns the same class of detail method  with all its fields.
 - [X] Get Email Data [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
 - [X] Schedule Email [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
 
-#### Products ✅
+#### Issued e-invoice
 
-- [X] List products [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [X] Create product [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [X] Get product [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [X] Modify product [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
-- [X] Delete product [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+- [ ] Send the e-invoice [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+- [ ] Verify e-invoice XML [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Get e-invoice XML [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Get e-invoice rejection reason [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
 
-#### Clients ✅
+#### Received Documents
 
-- [X] List clients [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [X] Create client [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
-- [X] Get client [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
-- [X] Modify client [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
-- [X] Delete client [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+- [ ] List Received Documents [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Create Received Document [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+- [ ] Get Received Document [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Modify Received Document [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
+- [ ] Delete Received Document [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+- [ ] Get New Received Document Totals [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+- [ ] Get Existing Received Document Totals [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+- [ ] Upload Received Document Attachment [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+- [ ] Delete Received Document Attachment [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+- [ ] Get Received Document Pre-create info [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
 
-## Usage
+#### Receipts
 
-Each callback accept a number of parameters equals to the sum of the required parameters +1 that is $additional_data
-that accept all optional parameters.
+- [ ] List Receipts [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Create Receipts [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+- [ ] Get Receipts [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Modify Receipts [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
+- [ ] Delete Receipts [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+- [ ] Get Receipts Pre-Create Info [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Get Receipts Monthly Totals [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
 
-### Validation
-For POST endpoint the package validate body using [Validators](https://laravel.com/docs/9.x/validation#manually-creating-validators). If something goes wrong the method returns an instance of `\Illuminate\Support\MessageBag`.
+#### Taxes
 
-### Pagination
-Package provide some pagination methods for list endpoints. Let's see a few examples:
+- [ ] List F24 [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Create F24 [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+- [ ] Get RF24 [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Modify F24 [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
+- [ ] Delete F24 [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+- [ ] Upload F24 Attachment [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+- [ ] Delete F24 Attachment [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
 
-``` php
-$issued_documents = new \OfflineAgency\LaravelFattureInCloudV2\Api\IssuedDocument();
-$issued_document_list = $issued_documents->list($document_type);
+#### Archive
 
-// return pagination fields like page, per_page...
-$issued_document_list->getPagination() 
+- [ ] List Archive Documents [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Create Archive Documents [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+- [ ] Get Archive Documents [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Modify Archive Documents [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
+- [ ] Delete Archive Documents [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+- [ ] Upload Archive Documents Attachment [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
 
-// return documents of the next page or null if there aren't next pages
-$issued_document_list->getPagination()->goToNextPage()
+#### Cashbook
 
-// some logic of next page fort other methods
-$issued_document_list->getPagination()->goToPrevPage()
-$issued_document_list->getPagination()->goToFirstPage()
-$issued_document_list->getPagination()->goToLastPage()
-```
+- [ ] List Cashbook Entries [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Create Cashbook Entries [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+- [ ] Get Cashbook Entries [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Modify Cashbook Entries [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
+- [ ] Delete Cashbook Entries [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
 
-## Examples
+#### Info
+- [ ] List Countries [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] List Detailed Countries [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] List Cities [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] List Languages [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] List Templates [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] List Currencies [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] List Units of Measure [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] List Delivery Notes Default Casuals [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] List Vat Types [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] List Payment Methods [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] List Payment Accounts [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] List Revenue Centers [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] List Cost Centers [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] List Product Categories [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] List Received Document Categories [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] List Archive Categories [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
 
-### Issued documents
-```php
-$issued_documents = new \OfflineAgency\LaravelFattureInCloudV2\Api\IssuedDocument();
-$response = $issued_documents->list($document_type);
-```
-
-### Products
-```php
-$products = new \OfflineAgency\LaravelFattureInCloudV2\Api\Product();
-$response = $products->list();
-```
-
-### Clients
-```php
-$clients = new \OfflineAgency\LaravelFattureInCloudV2\Api\Client();
-$response = $clients->list();
-```
+#### Settings
+- [ ] Create Payment Method [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+- [ ] Get Payment Method [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Modify Payment Method [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
+- [ ] Delete Payment Method [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+- [ ] Create Payment Account [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+- [ ] Get Payment Account [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Modify Payment Account [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
+- [ ] Delete Payment Account [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
+- [ ] Create Vat Type [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]()
+- [ ] Get Vat Type [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]()
+- [ ] Modify Vat Type [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]()
+- [ ] Delete Vat Type [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]()
 
 ## Testing
 
