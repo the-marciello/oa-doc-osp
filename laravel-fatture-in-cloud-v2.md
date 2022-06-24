@@ -176,8 +176,8 @@ Each response entity has this prefix on the namespace: `\OfflineAgency\LaravelFa
 #### User
 | Done | Endpoint | Type | Response |
 | ---- | -------- | ---- | -------- |
-| ❌ | Get User Info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List User Companies | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | Get User Info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List User Companies | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 
 #### Companies
 | Done | Endpoint | Type | Response |
@@ -197,11 +197,11 @@ Each response entity has this prefix on the namespace: `\OfflineAgency\LaravelFa
 
 | Done | Endpoint | Type | Response |
 | ---- | -------- | ---- | -------- |
-| 🔜 | List Suppliers | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| 🔜 | Create Supplier | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| 🔜 | Get Supplier | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| 🔜 | Modify Supplier | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
-| 🔜 | Delete Supplier | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
+| ✅ | List Suppliers | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | `Supplier\SupplierList` |
+| ✅ | Create Supplier | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | `Supplier\Supplier` |
+| ✅ | Get Supplier | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | `Supplier\Supplier` |
+| ✅ | Modify Supplier | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | `Supplier\Supplier` |
+| ✅ | Delete Supplier | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | `'Supplier deleted'` |
 
 #### Products
 | Done | Endpoint | Type | Response |
