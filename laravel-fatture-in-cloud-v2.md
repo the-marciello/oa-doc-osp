@@ -107,6 +107,8 @@ $issued_documents = new \OfflineAgency\LaravelFattureInCloudV2\Api\IssuedDocumen
 $response = $issued_documents->bin($document_id);
 ```
 
+For the example described above the package also provide the `binDetail()` method.
+
 ### Rate limit <Badge type="error" text="HOT" vertical="middle"/>
 
 This package provides a method to intercept throttle errors (403, 429) and automatically retry.
@@ -129,7 +131,8 @@ $client = new \OfflineAgency\LaravelFattureInCloudV2\Api\Client();
 $client_list = $client->list();
 ```
 
-This snippet returns an instance of `\OfflineAgency\LaravelFattureInCloudV2\Entities\Client\ClientList` that provide 2 public methods:
+This snippet returns an instance of `\OfflineAgency\LaravelFattureInCloudV2\Entities\Client\ClientList` that provide 3 public methods:
+- `hasItems()` that check if the list has  at least one element
 - `getItems()` that returns an array of `\OfflineAgency\LaravelFattureInCloudV2\Entities\Client\Client` from which you can access to all client's fields
 - `getPagination()` that returns an instance of `\OfflineAgency\LaravelFattureInCloudV2\Entities\Client\ClientPagination` from which you can access to all pagination's fields and [methods](#pagination)
 
