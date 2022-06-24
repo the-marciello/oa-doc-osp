@@ -107,7 +107,7 @@ $issued_documents = new \OfflineAgency\LaravelFattureInCloudV2\Api\IssuedDocumen
 $response = $issued_documents->bin($document_id);
 ```
 
-For the example described above the package also provide the `binDetail()` method.
+For the example described above the package also provide the `binDetail()` method. It allows you to get the invoice from the ID of a deleted proforma. 
 
 ### Rate limit <Badge type="error" text="HOT" vertical="middle"/>
 
