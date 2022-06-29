@@ -179,13 +179,13 @@ Each response entity has this prefix on the namespace: `\OfflineAgency\LaravelFa
 #### User
 | Done | Endpoint | Type | Response |
 | ---- | -------- | ---- | -------- |
-| 🔜 | Get User Info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| 🔜 | List User Companies | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ✅ | Get User Info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ✅ | List User Companies | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 
 #### Companies
 | Done | Endpoint | Type | Response |
 | ---- | -------- | ---- | -------- |
-| ❌ | Get Company Info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ✅ | Get Company Info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 
 #### Clients
 | Done | Endpoint | Type | Response |
@@ -243,27 +243,27 @@ Each response entity has this prefix on the namespace: `\OfflineAgency\LaravelFa
 #### Received Documents
 | Done | Endpoint | Type | Response |
 | ---- | -------- | ---- | -------- |
-| ❌ | List Received Documents | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | Create Received Document | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| ❌ | Get Received Document | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | Modify Received Document | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
-| ❌ | Delete Received Document | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
-| ❌ | Get New Received Document Totals | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| ❌ | Get Existing Received Document Totals | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| ❌ | Upload Received Document Attachment | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| ❌ | Delete Received Document Attachment | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
-| ❌ | Get Received Document Pre-create info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List Received Documents | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | Create Received Document | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| 🔜 | Get Received Document | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | Modify Received Document | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
+| 🔜 | Delete Received Document | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
+| 🔜 | Get New Received Document Totals | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| 🔜 | Get Existing Received Document Totals | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| 🔜 | Upload Received Document Attachment | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| 🔜 | Delete Received Document Attachment | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
+| 🔜 | Get Received Document Pre-create info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 
 #### Receipts
 | Done | Endpoint | Type | Response |
 | ---- | -------- | ---- | -------- |
-| ❌ | List Receipts | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | Create Receipts | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| ❌ | Get Receipts | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | Modify Receipts | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
-| ❌ | Delete Receipts | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
-| ❌ | Get Receipts Pre-Create Info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | Get Receipts Monthly Totals | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ✅ | List Receipts | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ✅ | Create Receipts | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ✅ | Get Receipts | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ✅ | Modify Receipts | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
+| ✅ | Delete Receipts | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
+| ✅ | Get Receipts Pre-Create Info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ✅ | Get Receipts Monthly Totals | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 
 #### Taxes
 | Done | Endpoint | Type | Response |
