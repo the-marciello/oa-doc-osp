@@ -68,6 +68,14 @@ $issued_documents = new \OfflineAgency\LaravelFattureInCloudV2\Api\IssuedDocumen
 
 ## Features
 
+### All <Badge type="error" text="HOT" vertical="middle"/>
+This package provide `all()` method that allow you to get an array of all results without pagination. It's implemented for all endpoint that provide a list method with pagination. Let's see an example:
+
+```php
+$issued_documents = new \OfflineAgency\LaravelFattureInCloudV2\Api\IssuedDocument();
+$issued_document_list = $issued_documents->all('invoice');
+```
+
 ### Pagination
 This package provides a pagination system that allow you to move between pages using simple methods:
 
@@ -306,7 +314,7 @@ Each response entity has this prefix on the namespace: `\OfflineAgency\LaravelFa
 | ❌ | List Currencies | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 | ❌ | List Units of Measure | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 | ❌ | List Delivery Notes Default Casuals | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List Vat Types | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ✅ | List Vat Types | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 | ❌ | List Payment Methods | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 | ❌ | List Payment Accounts | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 | ❌ | List Revenue Centers | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
