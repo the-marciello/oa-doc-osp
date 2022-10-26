@@ -235,24 +235,24 @@ Each response entity has this prefix on the namespace: `\OfflineAgency\LaravelFa
 #### Issued e-invoice
 | Done | Endpoint | Type | Response |
 | ---- | -------- | ---- | -------- |
-| ❌ | Send the e-invoice | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| ❌ | Verify e-invoice XML | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | Get e-invoice XML | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | Get e-invoice rejection reason | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | Send the e-invoice | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| 🔜 | Verify e-invoice XML | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | Get e-invoice XML | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | Get e-invoice rejection reason | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 
 #### Received Documents
 | Done | Endpoint | Type | Response |
 | ---- | -------- | ---- | -------- |
-| 🔜 | List Received Documents | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| 🔜 | Create Received Document | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| 🔜 | Get Received Document | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| 🔜 | Modify Received Document | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
-| 🔜 | Delete Received Document | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
-| 🔜 | Get New Received Document Totals | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| 🔜 | Get Existing Received Document Totals | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| 🔜 | Upload Received Document Attachment | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| 🔜 | Delete Received Document Attachment | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
-| 🔜 | Get Received Document Pre-create info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | List Received Documents | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Create Received Document | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Get Received Document | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ❌ | Modify Received Document | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
+| ❌ | Delete Received Document | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
+| ❌ | Get New Received Document Totals | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Get Existing Received Document Totals | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Upload Received Document Attachment | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
+| ❌ | Delete Received Document Attachment | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
+| ❌ | Get Received Document Pre-create info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 
 #### Receipts
 | Done | Endpoint | Type | Response |
@@ -298,22 +298,22 @@ Each response entity has this prefix on the namespace: `\OfflineAgency\LaravelFa
 #### Info
 | Done | Endpoint | Type | Response |
 | ---- | -------- | ---- | -------- |
-| ❌ | List Countries | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List Detailed Countries | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List Cities | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List Languages | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List Templates | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List Currencies | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List Units of Measure | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List Delivery Notes Default Casuals | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List Vat Types | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List Payment Methods | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List Payment Accounts | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List Revenue Centers | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List Cost Centers | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List Product Categories | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List Received Document Categories | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | List Archive Categories | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List Countries | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List Detailed Countries | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List Cities | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List Languages | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List Templates | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List Currencies | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List Units of Measure | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List Delivery Notes Default Casuals | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| ✅ | List Vat Types | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List Payment Methods | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List Payment Accounts | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List Revenue Centers | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List Cost Centers | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List Product Categories | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List Received Document Categories | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| 🔜 | List Archive Categories | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 
 #### Settings
 | Done | Endpoint | Type | Response |
