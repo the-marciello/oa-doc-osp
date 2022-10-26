@@ -33,7 +33,7 @@ in the ```app/Notifications``` directory.
 
 Here is an example:
 
-```
+```php
 <?php
 
 namespace OfflineAgency\LaravelArubaSms\Notifications;
@@ -130,7 +130,7 @@ After generating your command, you should define appropriate values for the **si
 
 Let’s take `ArubaSmsCommand` as an example:
 
-```
+```php 
 protected $signature = 'aruba:sms {command_type} {--from=} {--to=} {--pageNumber=} {--pageSize=} {--recipient=} {--phoneNumber=*}';
 
 protected $description = '';
@@ -138,7 +138,7 @@ protected $description = '';
 
 The handle method will be called when your command is executed.
 
-```
+```php
 public function handle()
 {
     $argument = $this->argument('command_type');
@@ -163,7 +163,7 @@ public function handle()
 
 The method to check aruba sms status is as follows:
 
-```
+```php 
 public function checkArubaSmsStatus(): string
 {
     $aruba_sms_service = new ArubaSmsService;
@@ -178,13 +178,13 @@ public function checkArubaSmsStatus(): string
 
 To start the command run:
 
-```
+```php 
 php artisan aruba:sms status
 ```
 
 The method to check aruba sms history is as follows:
 
-```
+```php 
 public function checkArubaSmsHistory(): string
 {
     $aruba_sms_service = new LaravelArubaSms;
@@ -216,13 +216,13 @@ public function checkArubaSmsHistory(): string
 
 To start the command run:
 
-```
+```php 
 php artisan aruba:sms history
 ```
 
 The method to check aruba sms recipient-history is as follows:
 
-```
+```php 
 public function checkArubaSmsRecipientHistory()
 {
     if (!is_null($this->option('recipient'))) {
@@ -258,13 +258,13 @@ public function checkArubaSmsRecipientHistory()
 
 To start the command run:
 
-```
+```php 
 php artisan aruba:sms recipient-history
 ```
 
 The method to test the sending of sms is as follows
 
-```
+```php 
 public function testSendSms()
 {
     if (
@@ -305,7 +305,7 @@ public function testSendSms()
 
 To start the command run:
 
-```
+```php 
 php artisan aruba:sms notification
 ```
 

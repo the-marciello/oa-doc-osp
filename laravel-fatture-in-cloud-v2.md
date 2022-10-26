@@ -68,6 +68,14 @@ $issued_documents = new \OfflineAgency\LaravelFattureInCloudV2\Api\IssuedDocumen
 
 ## Features
 
+### All <Badge type="error" text="HOT" vertical="middle"/>
+This package provide `all()` method that allow you to get an array of all results without pagination. It's implemented for all endpoint that provide a list method with pagination. Let's see an example:
+
+```php
+$issued_documents = new \OfflineAgency\LaravelFattureInCloudV2\Api\IssuedDocument();
+$issued_document_list = $issued_documents->all('invoice');
+```
+
 ### Pagination
 This package provides a pagination system that allow you to move between pages using simple methods:
 
