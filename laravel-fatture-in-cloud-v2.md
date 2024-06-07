@@ -249,18 +249,18 @@ Each response entity has this prefix on the namespace: `\OfflineAgency\LaravelFa
 | 🔜 | Get e-invoice rejection reason | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 
 #### Received Documents
-| Done | Endpoint | Type | Response |
-| ---- | -------- | ---- | -------- |
-| ❌ | List Received Documents | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | Create Received Document | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| ❌ | Get Received Document | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | Modify Received Document | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
-| ❌ | Delete Received Document | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
-| ❌ | Get New Received Document Totals | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| ❌ | Get Existing Received Document Totals | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| ❌ | Upload Received Document Attachment | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| ❌ | Delete Received Document Attachment | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
-| ❌ | Get Received Document Pre-create info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
+| Done | Endpoint | Type | Response                                         |
+| - | -------- | ---- |--------------------------------------------------|
+| ✅ | List Received Documents | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | `ReceivedDocument\ReceivedDocumentList`          |
+| ✅ | Create Received Document | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | `ReceivedDocument\ReceivedDocument`              |
+| ✅ | Get Received Document | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | `ReceivedDocument\ReceivedDocument`              |
+| ✅ | Modify Received Document | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | `ReceivedDocument\ReceivedDocument`              |
+| ✅ | Delete Received Document | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | `Document deleted`                               |
+| ✅ | Get New Received Document Totals | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | `ReceivedDocument\ReceivedDocumentTotals`        |
+| ✅ | Get Existing Received Document Totals | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | `ReceivedDocument\ReceivedDocumentTotals`        |
+| ✅ | Upload Received Document Attachment | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | `ReceivedDocument\ReceivedDocumentAttachment`     |
+| ✅ | Delete Received Document Attachment | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | `Attachment Deleted`                             |
+| ✅ | Get Received Document Pre-create info | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | `ReceivedDocument\ReceivedDocumentPreCreateInfo` |
 
 #### Receipts
 | Done | Endpoint | Type | Response |
@@ -274,15 +274,15 @@ Each response entity has this prefix on the namespace: `\OfflineAgency\LaravelFa
 | ✅ | Get Receipts Monthly Totals | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
 
 #### Taxes
-| Done | Endpoint | Type | Response |
-| ---- | -------- | ---- | -------- |
-| ❌ | List F24 | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | Create F24 | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| ❌ | Get RF24 | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | - |
-| ❌ | Modify F24 | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | - |
-| ❌ | Delete F24 | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
-| ❌ | Upload F24 Attachment | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | - |
-| ❌ | Delete F24 Attachment | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | - |
+| Done | Endpoint | Type | Response                |
+| ---- | -------- | ---- |-------------------------|
+| ✅ | List F24 | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | `Taxes\TaxesList`       |
+| ✅ | Create F24 | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | `Taxes\Taxes`           |
+| ✅ | Get RF24 | [![GET method](https://img.shields.io/static/v1.svg?label=&message=GET&color=green)]() | `Taxes\Taxes`           |
+| ✅ | Modify F24 | [![PUT method](https://img.shields.io/static/v1.svg?label=&message=PUT&color=violet)]() | `Taxes\Taxes`           |
+| ✅ | Delete F24 | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | `Taxes Deleted`         |
+| ✅ | Upload F24 Attachment | [![POST method](https://img.shields.io/static/v1.svg?label=&message=POST&color=blue)]() | `Taxes\TaxesAttachment` |
+| ✅ | Delete F24 Attachment | [![DELETE method](https://img.shields.io/static/v1.svg?label=&message=DELETE&color=red)]() | `Attachment deleted`     |
 
 #### Archive
 | Done | Endpoint | Type | Response |
